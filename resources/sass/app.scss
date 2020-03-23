@@ -1,0 +1,122 @@
+// Fonts
+//@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+@import './bootstrap.scss';
+
+//@import './fontawesome.scss';
+
+$color-darkblue: #2b5797;
+
+.text-darkblue { color: $color-darkblue !important; }
+
+.bg-darkblue { background-color: $color-darkblue !important; }
+
+
+.sendpass-brand {
+    padding: 0;
+    height:40px;
+}
+.sendpass-brand > img {
+    display: inline-block;
+    width:auto;
+    height:auto;
+    max-height:40px;
+    vertical-align: middle;
+}
+
+.sendpass-brand > span {
+    height: 40px;
+    color: $color-darkblue;
+    display: inline-block;
+    font-size: 34px;
+    line-height: 40px;
+    margin-bottom: 0;
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+
+
+
+
+ul.select-locale-big {
+    height: 40px;
+}
+ul.select-locale-big > li > div.dropdown-menu {
+    left: -1rem;
+}
+ul.select-locale-big > li > a.dropdown-toggle {
+    height: 40px;
+    padding-top: 9px;
+    padding-bottom: 10px;
+}
+ul.select-locale-big > li > a.dropdown-toggle::after {
+    margin-left: 0.1em;
+    vertical-align: inherit;
+}
+
+ul.select-locale-big > li > a.dropdown-toggle > svg, ul.select-locale-big > li > div.dropdown-menu > a.dropdown-item > svg {
+    height: 21px;
+    width: 28px;
+    vertical-align: middle;
+}
+ul.select-locale-big > li > a.dropdown-toggle > span, ul.select-locale-big > li > div.dropdown-menu > a.dropdown-item > span {
+    margin-left: 0.25rem;
+    vertical-align: middle;
+}
+
+
+
+
+button.select-locale-small {
+    padding: 0.5rem 0.75rem;
+    margin-right: 0.75rem;
+    margin-left: auto;
+}
+button.select-locale-small > svg {
+    height: 21px;
+    width: 28px;
+    vertical-align: middle;
+}
+
+ul.select-locale-small > li > a > svg {
+    height: 21px;
+    width: 28px;
+    vertical-align: middle;
+}
+ul.select-locale-small > li > a > span {
+    margin-left: 0.25rem;
+    vertical-align: middle;
+}
+
+
+@include media-breakpoint-up(sm) {
+    div.navbar-collapse.collapse#select-locale-small-content {
+        display: none !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+button#execopy>svg {
+    max-height:1.5rem;
+}
+div#succopied>svg#i-checkmark {
+    max-height:1.5rem;
+    stroke-width:5px;
+}
+
+button#shdpass>svg {
+    max-height:1.5rem;
+}
+
+button#share-sec-link>svg {
+    max-height:1.5rem;
+}

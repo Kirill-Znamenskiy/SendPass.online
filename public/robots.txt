@@ -1,0 +1,42 @@
+# sendpass
+
+
+
+User-Agent: *
+Disallow: /
+Disallow: /created
+Disallow: /show
+Disallow: /lk
+Disallow: /show
+Sitemap: https://sendpass.online/sitemap.xml
+
+
+
+
+User-Agent: Googlebot
+Disallow: /
+Disallow: /created
+Disallow: /show
+Disallow: /lk
+Disallow: /show
+
+User-Agent: Googlebot-Image
+Disallow: /
+
+
+
+
+User-Agent: Yandex
+Disallow: /
+Disallow: /created
+Disallow: /show
+Disallow: /lk
+Disallow: /show
+Clean-Param: from&_openstat&utm_source&utm_medium&utm_campaign&utm_content&utm_term&pm_source&pm_block&pm_position&clid&yclid&ymclid&frommarket&text
+
+User-Agent: YandexImages
+Disallow: /
+
+
+
+
