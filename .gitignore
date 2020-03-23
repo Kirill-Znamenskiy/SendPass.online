@@ -13,6 +13,9 @@
 
 /node_modules
 
+# because in package.json dependencies is empty, only devDependencies
+/package-lock.json
+
 /public/storage/*
 /public/hot
 
