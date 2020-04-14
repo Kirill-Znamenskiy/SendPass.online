@@ -45,8 +45,6 @@ $csh->exec_commands([
 
     $csh::commands_git_config_for_commits(),
     $csh::commands_git_commit_and_push(),
-
-    //$csh::commands_composer_update(),
 ]);
 
 
