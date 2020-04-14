@@ -30,6 +30,7 @@ class MainController extends BaseController
         $maxShowCount2Label = static::getMaxShowCount2Label();
         $lifetimeValue2Label = static::getLifetimeValue2Label();
 
+
         if ($request->isMethod('POST')) {
             $postData = $request->post();
             $validationRules = [
