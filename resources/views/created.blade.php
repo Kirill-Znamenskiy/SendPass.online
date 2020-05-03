@@ -1,8 +1,8 @@
 
 @php
     /**
-     * @var \App\Models\Secret|null $succCreatedSecret
-     * @var string|null $succCreatedSecretLifetime
+     * @var \App\Models\Secret|null $succ_created_secret
+     * @var string|null $succ_created_secret_lifetime
      */
 @endphp
 
@@ -14,12 +14,12 @@
 
     <div class="alert alert-success" role="alert">
         <h5 class="alert-heading">Ваши данные успешно сохранены и защищены!</h5>
-        <p class="m-0">Теперь у вас есть <a target="_blank" href="{{$showSecretUrl}}">безопасная ссылка</a> для доступа к защищенным данным.<br/>Вы можете спокойно отправлять ее через мессенджеры и/или эл.почту.</p>
+        <p class="m-0">Теперь у вас есть <a target="_blank" href="{{$show_secret_url}}">безопасная ссылка</a> для доступа к защищенным данным.<br/>Вы можете спокойно отправлять ее через мессенджеры и/или эл.почту.</p>
     </div>
 
     <div class="form-group mb-2">
         <div class="input-group">
-            <input id="securl" type="text" value="{{ $showSecretUrl }}" class="form-control" readonly="readonly" autocomplete="off"/>
+            <input id="securl" type="text" value="{{ $show_secret_url }}" class="form-control" readonly="readonly" autocomplete="off"/>
             <div class="input-group-append">
                 <button id="execopy" class="btn btn-outline-success px-2 py-1" type="button" >@svg('copy')</button>
             </div>
@@ -50,7 +50,7 @@
 
 
 
-    @if (isset($succCreatedSecret))
+    @if (isset($succ_created_secret))
         <div class="card">
             <div class="card-header py-2 px-3">
                 <button class="btn btn-link p-0 text-secondary text-decoration-underline" type="button" data-toggle="collapse" data-target="#ddd" aria-expanded="true" aria-controls="ddd">
@@ -71,7 +71,7 @@
             <div class="card-body collapse" id="ddd">
 
                 <div class="form-group">
-                    @php $inm = 'sectext'; $ivl = data_get($succCreatedSecret,$inm); @endphp
+                    @php $inm = 'sectext'; $ivl = data_get($succ_created_secret,$inm); @endphp
                     <label for="{{$inm}}">@lang('validation.attributes.'.$inm)</label>
                     <textarea name="{{$inm}}" id="{{$inm}}" class="form-control" disabled="disabled" rows="7">{{ $ivl }}</textarea>
 
@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="form-group mb-4">
-                    @php $inm = 'secpass'; $ivl = data_get($succCreatedSecret,$inm); @endphp
+                    @php $inm = 'secpass'; $ivl = data_get($succ_created_secret,$inm); @endphp
                     <label for="{{$inm}}">@lang('validation.attributes.'.$inm)</label>
                     <div class="input-group">
                         <input type="password"
@@ -99,12 +99,12 @@
                 </div>
 
                 <div class="form-group row mb-0 mx-0">
-                    @php $inm = 'max_show_count'; $ivl = data_get($succCreatedSecret,$inm); @endphp
+                    @php $inm = 'max_show_count'; $ivl = data_get($succ_created_secret,$inm); @endphp
                     <div class="col-12 col-sm-auto col-form-label text-nowrap pl-0">@lang('validation.attributes.'.$inm)</div>
-                    <div class="col-12 col-sm form-control">{{$maxShowCount2Label[$ivl]}}</div>
+                    <div class="col-12 col-sm form-control">{{$max_show_count2label[$ivl]}}</div>
                 </div>
                 <div class="form-group form-check">
-                    @php $inm = 'is_hide_show_count'; $ivl = data_get($succCreatedSecret,$inm); @endphp
+                    @php $inm = 'is_hide_show_count'; $ivl = data_get($succ_created_secret,$inm); @endphp
                     <input type="checkbox"
                            name="{{$inm}}" id="{{$inm}}"
                            value="1" {{ ($ivl === true) ? 'checked' : '' }}
@@ -117,12 +117,12 @@
                 </div>
 
                 <div class="form-group row mb-0 mx-0">
-                    @php $inm = 'lifetime'; $ivl = $succCreatedSecretLifetime; @endphp
+                    @php $inm = 'lifetime'; $ivl = $succ_created_secret_lifetime; @endphp
                     <div class="col-12 col-sm-auto col-form-label text-nowrap pl-0">@lang('validation.attributes.'.$inm)</div>
-                    <div class="col-12 col-sm form-control">{{$lifetimeValue2Label[$ivl]}}</div>
+                    <div class="col-12 col-sm form-control">{{$lifetime_value2label[$ivl]}}</div>
                 </div>
                 <div class="form-group form-check">
-                    @php $inm = 'is_hide_lifetime'; $ivl = data_get($succCreatedSecret,$inm); @endphp
+                    @php $inm = 'is_hide_lifetime'; $ivl = data_get($succ_created_secret,$inm); @endphp
                     <input type="checkbox"
                            name="{{$inm}}" id="{{$inm}}"
                            value="1" {{ ($ivl === true) ? 'checked' : '' }}

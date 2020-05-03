@@ -11,4 +11,12 @@ return [
     'keep_it_secret_keep_it_safe' => 'Keep it secret. Keep it safe.<i> - Gandalf the Grey</i>',
     'faq' => 'F.A.Q.',
     'frequently_asked_questions' => 'Frequently Asked Questions',
+    'access_options_to_protected_data' => 'Access options to protected data',
+    'input_here_any_text' => 'Input here any text for protected before sending...',
+    'or_password_here' => 'Or password here...',
+
+    'time' => ':count time|:count times',
+    'minute' => ':count minute|:count minutes',
+    'hour' => ':count hour|:count hours',
+    'day' => ':count day|:count days',
 ];

@@ -15,7 +15,7 @@ if (!isset($is_with_composer_update)) $is_with_composer_update = false;
 
 $csh->exec_commands([
     //'rsync -av -e "ssh -p 222" vv@rr.zkiy.ru:'.$remote_project_dir_path.'/.env /Users/hw/Projects/sendpass.online/.env.at.vv.rr.zkiy.ru',
-    'rsync -av -e "ssh -p 222" /Users/hw/Projects/sendpass.online/.env.at.prod vv@rr.zkiy.ru:'.$remote_project_dir_path.'/.env',
+    'rsync -av -e "ssh -p 222" /Users/hw/Projects/sendpass.online/.env.at.'.$remote_branch_name.' vv@rr.zkiy.ru:'.$remote_project_dir_path.'/.env',
 ]);
 
 
@@ -29,7 +29,7 @@ $csh->exec_commands_by_ssh($remote_sshost,[
     $csh::commands_git_config_for_readonly(),
     $csh::commands_git_pull($remote_branch_name),
 
-    //$csh::commands_composer_update(),
+    ($is_with_composer_update ? $csh::commands_composer_update((is_string($is_with_composer_update) ? $is_with_composer_update : null)) : null),
 
 
     'chmod 0770 ./runtime',

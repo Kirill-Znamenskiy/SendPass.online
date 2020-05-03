@@ -10,9 +10,11 @@ $app_url = url('/');
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <title>@yield('meta_title', __('t.default_meta_title',['app_name' => $app_name, 'app_url' => $app_url]))</title>
-    <meta name="keywords" content="@yield('meta_keywords',__('t.default_meta_keywords',['app_name' => $app_name, 'app_url' => $app_url]))"/>
-    <meta name="description" content="@yield('meta_description',__('t.default_meta_description',['app_name' => $app_name, 'app_url' => $app_url]))"/>
+    <title>@yield('meta_title', __('t.default_meta_title', ['app_name' => $app_name, 'app_url' => $app_url]))</title>
+    <meta name="keywords" content="@yield('meta_keywords', __('t.default_meta_keywords', ['app_name' => $app_name, 'app_url' => $app_url]))"/>
+    <meta name="description" content="@yield('meta_description', __('t.default_meta_description', ['app_name' => $app_name, 'app_url' => $app_url]))"/>
+    <link rel="canonical" href="{{canonicalizer()->get_canonical_url()}}"/>
+    {{--<link rel="canonical" href="_get_canonical_url_from_canonicalizer_"/>--}}
 
 
     <meta name="application-name" content="{{$app_name}}">

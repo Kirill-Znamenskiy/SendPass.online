@@ -11,6 +11,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use kz\func\Func;
+use kz\Illuminate\Routing\Canonicalizer;
 use kz\Illuminate\Support\Cast;
 use kz\Illuminate\Support\RegExp;
 
@@ -27,151 +29,151 @@ class MainController extends BaseController
 
     public function create(Request $request) {
 
-        $maxShowCount2Label = static::getMaxShowCount2Label();
-        $lifetimeValue2Label = static::getLifetimeValue2Label();
+        $max_show_count2label = static::get_max_show_count2label();
+        $lifetime_value2label = static::get_lifetime_value2label();
 
 
         if ($request->isMethod('POST')) {
-            $postData = $request->post();
-            $validationRules = [
+            canonicalizer()->set_path('/create/');
+            $post_data = $request->post();
+            $validation_rules = [
                 'sectext' => ['required_without:secpass','nullable','string','max:11111'],
                 'secpass' => ['required_without:sectext','nullable','string','max:255'],
-                'max_show_count' => ['required','integer',Rule::in(array_keys($maxShowCount2Label))],
+                'max_show_count' => ['required','integer',Rule::in(array_keys($max_show_count2label))],
                 'is_hide_show_count' => ['bool'],
-                'lifetime' => ['required','string',Rule::in(array_keys($lifetimeValue2Label))],
+                'lifetime' => ['required','string',Rule::in(array_keys($lifetime_value2label))],
                 'is_hide_lifetime' => ['bool'],
             ];
-            $validator = validator($postData,$validationRules);
+            $validator = validator($post_data,$validation_rules);
             $validator->validate();
 
-            $newSecret = new Secret();
-            $newSecret->secpass = Arr::get($postData,'secpass');
-            $newSecret->sectext = Arr::get($postData,'sectext');
+            $new_secret = new Secret();
+            $new_secret->secpass = Arr::get($post_data,'secpass');
+            $new_secret->sectext = Arr::get($post_data,'sectext');
 
-            $newSecret->is_allow_show_created = TRUE;
+            $new_secret->is_allow_show_created = TRUE;
 
-            $newSecret->crr_show_count = 0;
-            $newSecret->max_show_count = Cast::toInt($postData['max_show_count']);
-            $newSecret->is_hide_show_count = Cast::toBool([$postData,'is_hide_show_count']);
+            $new_secret->crr_show_count = 0;
+            $new_secret->max_show_count = Cast::toInt($post_data['max_show_count']);
+            $new_secret->is_hide_show_count = Cast::toBool([$post_data,'is_hide_show_count']);
 
-            $lifetime = $postData['lifetime'];
-            $expiredAt = CarbonImmutable::now();
-            $lifetimeMatches = RegExp::extract_preg_matches($postData['lifetime'],'/^(\d\d)(m|h|d)$/');
-            $lifetimeUnitValue = Cast::toInt($lifetimeMatches[1]);
-            $lifetimeUnitKey = (string)$lifetimeMatches[2];
+            $lifetime = $post_data['lifetime'];
+            $expired_at = CarbonImmutable::now();
+            $lifetime_matches = RegExp::extract_preg_matches($post_data['lifetime'],'/^(\d\d)(m|h|d)$/');
+            $lifetime_unit_value = Cast::toInt($lifetime_matches[1]);
+            $lifetime_unit_key = (string)$lifetime_matches[2];
             if (false) throw new \LogicException();
-            elseif ($lifetimeUnitKey === 'm') $expiredAt = $expiredAt->addMinutes($lifetimeUnitValue);
-            elseif ($lifetimeUnitKey === 'h') $expiredAt = $expiredAt->addHours($lifetimeUnitValue);
-            elseif ($lifetimeUnitKey === 'd') $expiredAt = $expiredAt->addDays($lifetimeUnitValue);
+            elseif ($lifetime_unit_key === 'm') $expired_at = $expired_at->addMinutes($lifetime_unit_value);
+            elseif ($lifetime_unit_key === 'h') $expired_at = $expired_at->addHours($lifetime_unit_value);
+            elseif ($lifetime_unit_key === 'd') $expired_at = $expired_at->addDays($lifetime_unit_value);
             else throw new \LogicException();
-            $newSecret->expired_at = $expiredAt;
-            $newSecret->is_hide_lifetime = Cast::toBool([$postData,'is_hide_lifetime']);
+            $new_secret->expired_at = $expired_at;
+            $new_secret->is_hide_lifetime = Cast::toBool([$post_data,'is_hide_lifetime']);
 
-            $newSecret->uuid = Str::uuid();
+            $new_secret->uuid = Str::uuid();
 
-            throw_unless($newSecret->save(), \RuntimeException::class);
+            throw_unless($new_secret->save(), \RuntimeException::class);
 
 
-            $request->session()->flash('succCreatedSecretId',$newSecret->id);
-            $request->session()->flash('succCreatedSecretLifetime',$lifetime);
+            $request->session()->flash('succ_created_secret_id',$new_secret->id);
+            $request->session()->flash('succ_created_secret_lifetime',$lifetime);
 
-            return redirect()->action([static::class,'created'], ['secuuid' => $newSecret->uuid]);
+            return redirect()->action([static::class,'created'], ['secuuid' => $new_secret->uuid]);
+        }
+        else {
+            canonicalizer()->set_path('/');
         }
 
-        return view('create', compact(['maxShowCount2Label','lifetimeValue2Label']));
+        return view('create', compact(['max_show_count2label','lifetime_value2label']));
     }
 
-    static public function getMaxShowCount2Label() {
-        return [
-            1 => '1 раз',
-            2 => '2 раза',
-            3 => '3 раза',
-            4 => '4 раза',
-            5 => '5 раз',
-            6 => '6 раз',
-            7 => '7 раз',
-            8 => '8 раз',
-            9 => '9 раз',
-        ];
+    static public function get_max_show_count2label() {
+        $rng = range(1,9);
+        $ret = [];
+        foreach (range(1,9) AS $count) {
+            $ret[$count] = trans_choice('t.time',$count);
+        }
+        return $ret;
     }
 
-    static public function getLifetimeValue2Label() {
+    static public function get_lifetime_value2label() {
         return [
-            '05m' => '5 минут',
-            '15m' => '15 минут',
-            '30m' => '30 минут',
-            '01h' => '1 час',
-            '03h' => '3 часа',
-            '11h' => '11 часов',
-            '01d' => '1 день',
-            '02d' => '2 дня',
-            '03d' => '3 дня',
-            '07d' => '7 дней',
-            '30d' => '30 дней',
+            '05m' => trans_choice('t.minute',5),
+            '15m' => trans_choice('t.minute',15),
+            '30m' => trans_choice('t.minute',30),
+            '01h' => trans_choice('t.hour',1),
+            '03h' => trans_choice('t.hour',3),
+            '11h' => trans_choice('t.hour',11),
+            '01d' => trans_choice('t.day',1),
+            '02d' => trans_choice('t.day',2),
+            '03d' => trans_choice('t.day',3),
+            '07d' => trans_choice('t.day',7),
+            '30d' => trans_choice('t.day',30),
         ];
     }
 
     public function created(Request $request, $secuuid) {
+        canonicalizer()->set_path('/created/'.$secuuid.'/');
 
         /** @var Secret $secret */
         $secret = Secret::where('uuid',$secuuid)->firstOrFail();
 
-        $isKeep = (App::isLocal() AND config('app.debug'));
+        $is_keep = (App::isLocal() AND config('app.debug'));
 
-        $succCreatedSecretId = $request->session()->get('succCreatedSecretId');
-        $succCreatedSecretLifetime = $request->session()->get('succCreatedSecretLifetime');
-        if ($isKeep) {
-            $request->session()->keep(['succCreatedSecretId','succCreatedSecretLifetime']);
+        $succ_created_secret_id = $request->session()->get('succ_created_secret_id');
+        $succ_created_secret_lifetime = $request->session()->get('succ_created_secret_lifetime');
+        if ($is_keep) {
+            $request->session()->keep(['succ_created_secret_id','succ_created_secret_lifetime']);
         }
         else {
-            $request->session()->forget(['succCreatedSecretId','succCreatedSecretLifetime']);
+            $request->session()->forget(['succ_created_secret_id','succ_created_secret_lifetime']);
         }
 
-        if (empty($succCreatedSecretId)) {
-            $succCreatedSecret = null;
-            $succCreatedSecretLifetime = null;
+        if (empty($succ_created_secret_id)) {
+            $succ_created_secret = null;
+            $succ_created_secret_lifetime = null;
         }
         else {
-            if ($secret->id !== $succCreatedSecretId) {
+            if ($secret->id !== $succ_created_secret_id) {
                 throw new AuthorizationException();
             }
             if (empty($secret->is_allow_show_created)) {
                 throw new AuthorizationException();
             }
 
-            if (!$isKeep) $secret->is_allow_show_created = false;
+            if (!$is_keep) $secret->is_allow_show_created = false;
             throw_unless($secret->save(), \RuntimeException::class);
 
-            $succCreatedSecret = $secret;
+            $succ_created_secret = $secret;
         }
 
 
-        $crr_show_count = $secret->crr_show_count;
-        $created_at = $secret->created_at;
-        $updated_at = $secret->updated_at;
-        $expired_at = $secret->expired_at;
+        //$crr_show_count = $secret->crr_show_count;
+        //$created_at = $secret->created_at;
+        //$updated_at = $secret->updated_at;
+        //$expired_at = $secret->expired_at;
 
 
-        $maxShowCount2Label = static::getMaxShowCount2Label();
-        $lifetimeValue2Label = static::getLifetimeValue2Label();
+        $max_show_count2label = static::get_max_show_count2label();
+        $lifetime_value2label = static::get_lifetime_value2label();
 
         return view('created', [
             'secret' => $secret,
-            'showSecretUrl' => static::getShowSecretUrl($secret),
-            'succCreatedSecret' => $succCreatedSecret,
-            'succCreatedSecretLifetime' => $succCreatedSecretLifetime,
-            'maxShowCount2Label' => $maxShowCount2Label,
-            'lifetimeValue2Label' => $lifetimeValue2Label,
+            'show_secret_url' => static::get_show_secret_url($secret),
+            'succ_created_secret' => $succ_created_secret,
+            'succ_created_secret_lifetime' => $succ_created_secret_lifetime,
+            'max_show_count2label' => $max_show_count2label,
+            'lifetime_value2label' => $lifetime_value2label,
         ]);
     }
 
-    static public function getShowSecretUrl(Secret $secret) {
+    static public function get_show_secret_url(Secret $secret) {
         if (empty($secret->uuid)) throw new \RuntimeException();
         return action([static::class,'show'],['secuuid' => $secret->uuid]);
     }
 
     public function show(Request $request, $secuuid) {
-
+        canonicalizer()->set_path('/show/'.$secuuid.'/');
 
 
         $view_params = [];
@@ -182,17 +184,17 @@ class MainController extends BaseController
             $secret = Secret::where('uuid',$secuuid)->firstOrFail();
             $secret->crr_show_count += 1;
 
-            $validationData = [
+            $validation_data = [
                 'crr_show_count' => $secret->crr_show_count,
                 'max_show_count' => $secret->max_show_count,
                 'expired_at' => $secret->expired_at,
             ];
-            $validationRules = [
+            $validation_rules = [
                 'max_show_count' => ['required','integer'],
                 'crr_show_count' => ['required','integer','lte:max_show_count'],
                 'expired_at' => ['required','after:now'],
             ];
-            $validator = validator($validationData,$validationRules);
+            $validator = validator($validation_data,$validation_rules);
             //if ($validator->fails()) {
             //    return redirect('post/create')
             //        ->withErrors($validator)
@@ -210,14 +212,15 @@ class MainController extends BaseController
             unset($view_params['secuuid']);
         }
 
-        $view_params['maxShowCount2Label'] = static::getMaxShowCount2Label();
-        $view_params['lifetimeValue2Label'] = static::getLifetimeValue2Label();
+        $view_params['max_show_count2label'] = static::get_max_show_count2label();
+        $view_params['lifetime_value2label'] = static::get_lifetime_value2label();
 
         return view('show', $view_params);
     }
 
 
     public function faq(Request $request) {
+        canonicalizer()->set_path('/faq/');
         return view('faq');
     }
 }

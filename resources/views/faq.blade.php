@@ -1,7 +1,12 @@
+@php
+    $app_name = config('app.name', 'Laravel');
+    $app_url = url('/');
+@endphp
+
 @extends('_layout')
 
 @section('meta_title')
-    {{config('app.name', 'Laravel').'-'.__('t.frequently_asked_questions')}}
+    {{$app_name.' - '.__('t.frequently_asked_questions')}}
 @endsection
 
 @section('content')

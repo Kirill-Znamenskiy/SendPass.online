@@ -43,7 +43,7 @@
                 class="form-control @error($inm) is-invalid @enderror"
                 autocomplete="nope"
                 rows="7"
-                placeholder="Введите сюда любой текст, который хотите защитить перед отправкой..."
+                placeholder="{{__('t.input_here_any_text')}}"
             >{{ $ivl }}</textarea>
 
             @error($inm)<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
@@ -59,7 +59,7 @@
                        class="form-control @error($inm) is-invalid @enderror"
                        autocomplete="new-password"
                        data-lpignore="true"
-                       placeholder="Или сюда пароль..."
+                       placeholder="{{__('t.or_password_here')}}"
                 />
                 <div class="input-group-append">
                     <button id="shdpass" class="btn @if ($errors->has($inm)) btn-outline-danger @else btn-outline-secondary @endif px-1 py-1" type="button">@svg('eye-open')@svg('eye-slash','d-none')</button>
@@ -74,7 +74,7 @@
         <div class="card">
             <div class="card-header py-2 px-3">
                 <button class="btn btn-link p-0 text-secondary" type="button" data-toggle="collapse" data-target="#opts" aria-expanded="true" aria-controls="opts">
-                    Опции доступа к защищенным данным
+                    {{__('t.access_options_to_protected_data')}}
                 </button>
             </div>
             <div class="card-body collapse show" id="opts">
@@ -84,7 +84,7 @@
                     <div class="col-12 col-sm">
                         <select name="{{$inm}}" id="{{$inm}}" class="form-control @error($inm) is-invalid @enderror">
 {{--                                    <option value="" {{ ($ivl === null) ? 'selected' : '' }}>---</option>--}}
-                            @foreach($maxShowCount2Label AS $value => $label)
+                            @foreach($max_show_count2label AS $value => $label)
                                 <option value="{{$value}}" {{ ($ivl === $value) ? 'selected' : '' }}>{{$label}}</option>
                             @endforeach
                         </select>
@@ -111,7 +111,7 @@
                     <div class="col-12 col-sm">
                         <select name="{{$inm}}" id="{{$inm}}" class="form-control @error($inm) is-invalid @enderror">
 {{--                                    <option value="" {{ ($ivl === null) ? 'selected' : '' }}>---</option>--}}
-                            @foreach($lifetimeValue2Label AS $value => $label)
+                            @foreach($lifetime_value2label AS $value => $label)
                                 <option value="{{$value}}" {{ ($ivl === $value) ? 'selected' : '' }}>{{$label}}</option>
                             @endforeach
                         </select>
