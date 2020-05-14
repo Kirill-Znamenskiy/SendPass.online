@@ -21,34 +21,34 @@ $app_url = url('/');
     <meta name="theme-color" content="#ffffff">
 
     <!-- favicons -->
-    <link rel="shortcut icon" href="/favicons/favicon.ico?v=Gvb0oRr33W">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png?v=Gvb0oRr33W">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png?v=Gvb0oRr33W">
-    <link rel="icon" type="image/png" sizes="194x194" href="/favicons/favicon-194x194.png?v=Gvb0oRr33W">
+    <link rel="shortcut icon" href="/icons/favicon.ico?v=Gvb0oRr33W">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png?v=Gvb0oRr33W">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png?v=Gvb0oRr33W">
+    <link rel="icon" type="image/png" sizes="194x194" href="/icons/favicon-194x194.png?v=Gvb0oRr33W">
 
     <!-- icons for ios -->
     <meta name="apple-mobile-web-app-title" content="SendPass">
-    <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-touch-icon-57x57.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-touch-icon-72x72.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-touch-icon-76x76.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-touch-icon-114x114.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-touch-icon-120x120.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-touch-icon-144x144.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-touch-icon-152x152.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon-180x180.png?v=Gvb0oRr33W">
 
     <!-- icons for android -->
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png?v=Gvb0oRr33W">
-    <link rel="manifest" href="/favicons/site.webmanifest?v=Gvb0oRr33W">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png?v=Gvb0oRr33W">
+    <link rel="manifest" href="/icons/site.webmanifest?v=Gvb0oRr33W">
 
     <!-- icons for microsoft -->
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png?v=Gvb0oRr33W">
-    <meta name="msapplication-config" content="/favicons/browserconfig.xml?v=Gvb0oRr33W">
+    <meta name="msapplication-TileImage" content="/icons/mstile-144x144.png?v=Gvb0oRr33W">
+    <meta name="msapplication-config" content="/icons/browserconfig.xml?v=Gvb0oRr33W">
 
     <!-- icons for safari -->
-    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg?v=Gvb0oRr33W" color="#2b5797">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg?v=Gvb0oRr33W" color="#2b5797">
 
 
     <!-- CSRF Token -->
@@ -246,9 +246,11 @@ $app_url = url('/');
         <div class="container">
             <div class="row">
                 <div class="col-12 col-sm-4">
-{{--                    FOOTER--}}
                     <div class="mmnt-date-time">{{\Illuminate\Support\Carbon::now()->toIso8601String()}}</div>
-
+                    <div><a href="https://github.com/kirill-znamenskiy/sendpass.online">@svg('bs/github') GitHub</a></div>
+                    <div class="row">
+                        <small>git show: {{$git_show}}</small>
+                    </div>
                 </div>
                 <div class="col-12 col-sm-4">
                 </div>

@@ -45,9 +45,8 @@
 /update.lock
 /update.lock.tmp
 
-/.env
-/.env.backup
-/.env.at.*
+/.env*
+!/.env.example
 
 !.gitkeep
 
