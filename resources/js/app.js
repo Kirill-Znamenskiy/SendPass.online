@@ -168,7 +168,7 @@ jQuery(document).ready(function() {
 // for score Google PageSpeed Insights 100%
 jQuery(window).on('load', function() {
 
-    setTimeout(() => {
+    setTimeout(function() {
 
         // Здесь все эти тормознутые трекеры, чаты и прочая ересь,
         // без которой жить не может отдел маркетинга, и которые

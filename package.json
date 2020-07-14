@@ -11,7 +11,7 @@
     },
     "devDependencies": {
         "@fortawesome/fontawesome-free": "^5.12.1",
-        "bootstrap": "^4.4.1",
+        "bootstrap": "^4.5",
         "bootstrap-show-password": "^1.2.1",
         "bytesize-icons": "^1.4.0",
         "cross-env": "^6.0",

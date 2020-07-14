@@ -27,7 +27,7 @@ $app_url = url('/');
     <link rel="icon" type="image/png" sizes="194x194" href="/icons/favicon-194x194.png?v=Gvb0oRr33W">
 
     <!-- icons for ios -->
-    <meta name="apple-mobile-web-app-title" content="SendPass">
+    <meta name="apple-mobile-web-app-title" content="{{$app_name}}">
     <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-touch-icon-57x57.png?v=Gvb0oRr33W">
     <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png?v=Gvb0oRr33W">
     <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-touch-icon-72x72.png?v=Gvb0oRr33W">

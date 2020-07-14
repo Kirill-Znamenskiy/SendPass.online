@@ -7,7 +7,7 @@ $csh = \kz\console_tools\ConsoleScriptHelper::create()->start_script();
 
 
 if (!isset($remote_sshost)) $remote_sshost = ['vv','rr.zkiy.ru',222];
-if (!isset($remote_project_dir_path)) $remote_project_dir_path = '/home/vv/sendpass.online;';
+if (!isset($remote_project_dir_path)) $remote_project_dir_path = '/home/vv/sendpass.online';
 if (!isset($remote_cd_command)) $remote_cd_command = 'cd '.$remote_project_dir_path.';';
 if (!isset($remote_branch_name)) $remote_branch_name = 'master';
 if (!isset($is_with_composer_update)) $is_with_composer_update = false;
@@ -31,8 +31,12 @@ $csh->exec_commands_by_ssh($remote_sshost,[
 
     ($is_with_composer_update ? $csh::commands_composer_update((is_string($is_with_composer_update) ? $is_with_composer_update : null)) : null),
 
+    'crontab ./crontab;',
 
-    'chmod 0770 ./runtime',
+    'chmod u+x ./artisan',
+
+    $csh::commands_chmod_dirrs('./runtime','0775'),
+    //$csh::commands_chmod_files('./runtime','0664'),
 
     $csh::commands_chmod_dirrs('./storage','0775'),
     //$csh::commands_chmod_files('./storage','0664'),
@@ -40,11 +44,12 @@ $csh->exec_commands_by_ssh($remote_sshost,[
     $csh::commands_chmod_dirrs('./bootstrap/cache','0775'),
     //$csh::commands_chmod_files('./bootstrap/cache','0664'),
 
-    'php artisan config:clear',
-    'php artisan config:cache',
+    './artisan config:clear',
+    'rm ./bootstrap/cache/config.php', // force config:clear
+    './artisan config:cache',
 
-    'php artisan route:clear',
-    'php artisan route:cache', // not able closures routes, only controller based routes!
+    './artisan route:clear',
+    './artisan route:cache', // not able closures routes, only controller based routes!
 
 ]);
 
