@@ -19,7 +19,7 @@ $csh->exec_commands([
 ]);
 
 
-$csh->finish_script(true);
+//$csh->finish_script(true);
 
 
 $csh->check_by_ssh_git_problems($remote_sshost,$remote_cd_command);
@@ -27,7 +27,8 @@ $csh->exec_commands_by_ssh($remote_sshost,[
     $remote_cd_command,
 
     $csh::commands_git_config_for_readonly(),
-    $csh::commands_git_pull($remote_branch_name),
+    //$csh::commands_git_pull($remote_branch_name),
+    $csh::commands_git_pull('develop'),
 
     ($is_with_composer_update ? $csh::commands_composer_update((is_string($is_with_composer_update) ? $is_with_composer_update : null)) : null),
 
