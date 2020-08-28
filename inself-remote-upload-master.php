@@ -3,7 +3,7 @@ require(__DIR__.'/vendor/autoload.php');
 
 require(__DIR__.'/inself-local-commit-and-push.php');
 
-$csh = \kz\console_tools\ConsoleScriptHelper::create()->start_script();
+$csh = \KZ\ConsoleTools\ConsoleScriptHelper::create()->start_script();
 
 
 if (!isset($remote_sshost)) $remote_sshost = ['vv','rr.zkiy.ru',222];

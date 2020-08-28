@@ -1,7 +1,7 @@
 <?php
 require(__DIR__.'/vendor/autoload.php');
 
-$csh = \kz\console_tools\ConsoleScriptHelper::create()->start_script();
+$csh = \KZ\ConsoleTools\ConsoleScriptHelper::create()->start_script();
 
 $csh->exec_commands([
     $csh->commands_chdir(),
