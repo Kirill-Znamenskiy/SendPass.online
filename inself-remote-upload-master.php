@@ -19,7 +19,7 @@ $csh->exec_commands([
 ]);
 
 
-//$csh->finish_script();
+$csh->finish_script();
 
 
 $csh->check_by_ssh_git_problems($remote_sshost,$remote_cd_command);
