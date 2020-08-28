@@ -245,26 +245,20 @@ $app_url = url('/');
     <footer class="d-block bg-darkblue text-white py-3 mt-auto">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-sm-4">
-                    <div class="mmnt-date-time">{{\Illuminate\Support\Carbon::now()->toIso8601String()}}</div>
-                    <div><a href="https://github.com/kirill-znamenskiy/sendpass.online">@svg('bs/github') GitHub</a></div>
-                    <div class="row">
-                        <small>git show: {{$git_show}}</small>
+                <div class="col-12 col-sm-8">
+                    <div><a class="github" target="_blank" href="https://github.com/kirill-znamenskiy/sendpass.online">@svg('bs/github') GitHub</a></div>
+                    <div class="mt-1" style="line-height:1.1;">
+                        <span class="mmnt-date-time">{{\Illuminate\Support\Carbon::now()->toIso8601String()}}</span>
+                        <br/>
+                        <small class="text-white-50">git show: {{$git_show}}</small>
                     </div>
-                </div>
-                <div class="col-12 col-sm-4">
                 </div>
                 <div class="col-12 col-sm-4 text-center text-sm-right">
                     <a class="navbar-brand sendpass-brand mr-0" href="{{ $app_url }}">
-                        <img src="/logo-inverted-64.svg" width="32px" height="32px" onerror="this.onerror=null;this.src='/logo-inverted-64.png';" style="width:auto;height:auto;max-height:2.5rem;" class="d-inline-block" alt="{{ $app_name }}">
+                        <img src="/logo-inverted-64.svg" width="32px" height="32px" onerror="this.onerror=null;this.src='/logo-inverted-64.png';"class="d-inline-block" alt="{{ $app_name }}">
                         <span class="text-white">{{ $app_name }}</span>
                     </a>
                     <div>© 2020 @php echo ((intval(date('Y')) > 2020) ? ' - '.intval(date('Y')) : '') @endphp</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col text-white-50 text-center">
-                    <small>@lang('t.keep_it_secret_keep_it_safe')</small>
                 </div>
             </div>
         </div>

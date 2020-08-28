@@ -9,7 +9,6 @@ return [
     'default_meta_description' => null,
 
     'protect' => 'Защитить',
-    'keep_it_secret_keep_it_safe' => 'Keep it secret. Keep it safe.<i> - Gandalf the Grey</i>',
     'faq' => null,
     'frequently_asked_questions' => 'Часто Задаваемые Вопросы',
     'access_options_to_protected_data' => 'Опции доступа к защищенным данным',

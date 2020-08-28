@@ -18,7 +18,7 @@ class GitShowMiddleware {
         $cwd = getcwd();
         chdir(app()->basePath());
         $exec_lines = [];
-        exec('git show -s --no-color --decorate',$exec_lines);
+        exec('git show --no-color --no-patch --decorate',$exec_lines);
         $git_show = reset($exec_lines);
         chdir($cwd);
 
