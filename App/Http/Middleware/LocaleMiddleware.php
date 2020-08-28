@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use kz\func\Func;
+use KZ\Func\Func;
 use League\Uri\Uri;
 
 class LocaleMiddleware {
