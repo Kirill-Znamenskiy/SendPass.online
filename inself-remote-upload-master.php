@@ -19,7 +19,7 @@ $csh->exec_commands([
 ]);
 
 
-//$csh->finish_script(true);
+$csh->finish_script(true);
 
 
 $csh->check_by_ssh_git_problems($remote_sshost,$remote_cd_command);
@@ -39,10 +39,10 @@ $csh->exec_commands_by_ssh($remote_sshost,[
     //$csh::commands_chmod_files('./runtime','0664'),
 
     $csh::commands_chmod_dirrs('./storage','0775'),
-    $csh::commands_chmod_files('./storage','0664'),
+    //$csh::commands_chmod_files('./storage','0664'),
 
     $csh::commands_chmod_dirrs('./bootstrap/cache','0775'),
-    $csh::commands_chmod_files('./bootstrap/cache','0664'),
+    //$csh::commands_chmod_files('./bootstrap/cache','0664'),
 
     './artisan config:clear',
     'rm ./bootstrap/cache/config.php', // force config:clear
