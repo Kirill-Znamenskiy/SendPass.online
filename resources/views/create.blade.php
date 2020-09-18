@@ -1,3 +1,9 @@
+@php
+    $app_name = config('app.name', 'Laravel');
+    $app_url = url('/');
+    $app_link = '<a href="'.$app_url.'">'.$app_name.'</a>';
+@endphp
+
 @extends('_layout')
 
 @section('before-container')
