@@ -18,9 +18,9 @@ $color-darkblue: #2b5797;
 }
 .sendpass-brand > img {
     display: inline-block;
-    width:auto;
-    height:auto;
-    max-height:40px;
+    width: auto;
+    height: auto;
+    max-height: 40px;
     vertical-align: middle;
 }
 
@@ -100,6 +100,11 @@ ul.select-locale-small > li > a > span {
 
 
 
+main div.faq {
+    font-size: 90%;
+}
+
+
 
 
 
@@ -119,4 +124,21 @@ button#shdpass>svg {
 
 button#share-sec-link>svg {
     max-height:1.5rem;
+}
+
+
+footer a.github {
+    color: white;
+    text-decoration: none;
+}
+footer a.github:hover {
+    color: $cyan;
+    text-decoration: none;
+}
+footer a.github > svg {
+    height: 1.7rem;
+    width: auto;
+    vertical-align: bottom;
+    padding-bottom: 0.2rem;
+    padding-right: 0.1rem;
 }

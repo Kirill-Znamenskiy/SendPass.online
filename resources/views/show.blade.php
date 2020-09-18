@@ -49,19 +49,19 @@
                             <div class="form-group row mx-0">
                                 @php $inm = 'max_show_count'; $ivl = data_get($secret,$inm); @endphp
                                 <div class="col-12 col-sm-auto col-form-label text-nowrap pl-0">@lang('validation.attributes.'.$inm)</div>
-                                <div class="col-12 col-sm form-control">{{$maxShowCount2Label[$ivl]}}</div>
+                                <div class="col-12 col-sm form-control">{{$max_show_count2label[$ivl]}}</div>
                             </div>
 
                             <div class="form-group row mx-0">
                                 @php $inm = 'crr_show_count'; $ivl = $secret->crr_show_count; @endphp
                                 <div class="col-12 col-sm-auto col-form-label text-nowrap pl-0">@lang('validation.attributes.'.$inm)</div>
-                                <div class="col-12 col-sm form-control">{{$maxShowCount2Label[$ivl]}}</div>
+                                <div class="col-12 col-sm form-control">{{$max_show_count2label[$ivl]}}</div>
                             </div>
 
                             <div class="form-group row mx-0">
                                 @php $inm = 'rst_show_count'; $ivl = ($secret->max_show_count-$secret->crr_show_count); @endphp
                                 <div class="col-12 col-sm-auto col-form-label text-nowrap pl-0">@lang('validation.attributes.'.$inm)</div>
-                                <div class="col-12 col-sm form-control">@if (empty($ivl)) 0 (это последний раз!) @else {{$maxShowCount2Label[$ivl]}} @endif</div>
+                                <div class="col-12 col-sm form-control">@if (empty($ivl)) 0 (это последний раз!) @else {{$max_show_count2label[$ivl]}} @endif</div>
                             </div>
 
                         @endunless

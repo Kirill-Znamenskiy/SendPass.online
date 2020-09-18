@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use kz\func\Func;
+use KZ\Func\Func;
 use League\Uri\Uri;
 
 class LocaleMiddleware {
@@ -49,9 +49,9 @@ class LocaleMiddleware {
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
+     * @throws \RuntimeException
      */
-    public function handle(\Illuminate\Http\Request $request, Closure $next)
-    {
+    public function handle(\Illuminate\Http\Request $request, Closure $next) {
 
         $supported_locale2flag_svg_file_name = $this->_supported_locale2flag_svg_file_name;
 
@@ -70,6 +70,7 @@ class LocaleMiddleware {
         $app_domain = parse_url($app_url, PHP_URL_HOST);
         $app_domain_exploded = explode('.',$app_domain);
         $app_domain_suffix_exploded = $app_domain_exploded;
+        $app_domain_suffix = implode('.',$app_domain_suffix_exploded);
 
         $ind = count($app_domain_suffix_exploded);
         throw_if(($ind < 1), \RuntimeException::class);
@@ -81,8 +82,20 @@ class LocaleMiddleware {
         $req_domain_exploded = explode('.',$req_domain);
         $req_domain_exploded_reversed = array_reverse($req_domain_exploded);
         $req_domain_suffix_exploded = array_reverse(array_slice($req_domain_exploded_reversed,0,$ind));
+        $req_domain_suffix = implode('.',$req_domain_suffix_exploded);
 
-        if ($app_domain_suffix_exploded === $req_domain_suffix_exploded) {
+
+        $supported_locale2kit = [];
+        foreach ($supported_locale2flag_svg_file_name AS $supported_locale => $supported_locale_flag_svg_file_name) {
+            $aux_domain = (($supported_locale === $app_fallback_locale) ? '' : $supported_locale.'.').$app_domain_suffix;
+            $supported_locale2kit[$supported_locale] = [
+                'url' => $req_uri->withHost($aux_domain)->__toString(),
+                'flag_svg_file_name' => $supported_locale_flag_svg_file_name,
+            ];
+        }
+
+
+        if ($app_domain_suffix === $req_domain_suffix) {
 
             $locale_subdomain = (empty($req_domain_exploded_reversed[$ind]) ? '' : $req_domain_exploded_reversed[$ind]);
             throw_unless(is_string($locale_subdomain),\RuntimeException::class);
@@ -103,34 +116,26 @@ class LocaleMiddleware {
                 $new_app_locale = $app_fallback_locale;
             }
 
-            $req_domain_suffix = implode('.',$req_domain_suffix_exploded);
+
             $new_req_domain = (($new_app_locale === $app_fallback_locale) ? '' : $new_app_locale.'.').$req_domain_suffix;
             if ($new_req_domain !== $req_domain) {
                 return redirect($req_uri->withHost($new_req_domain)->__toString(),302);
             }
+            canonicalizer()->set_host($new_req_domain);
 
             if ($new_app_locale !== $app_locale) {
                 app()->setLocale($new_app_locale);
                 $app_locale = $new_app_locale;
+
             }
-
-            $supported_locale2kit = [];
-            foreach ($supported_locale2flag_svg_file_name AS $supported_locale => $supported_locale_flag_svg_file_name) {
-                $aux_req_domain = (($supported_locale === $app_fallback_locale) ? '' : $supported_locale.'.').$req_domain_suffix;
-                $supported_locale2kit[$supported_locale] = [
-                    'url' => $req_uri->withHost($aux_req_domain)->__toString(),
-                    'flag_svg_file_name' => $supported_locale_flag_svg_file_name,
-                ];
-            }
-
-            /** This variable is available globally on all your views, and sub-views */
-            view()->share([
-                'supported_locale2kit' => $supported_locale2kit,
-                'app_locale' => $app_locale,
-                'app_locale_kit' => $supported_locale2kit[$app_locale],
-            ]);
-
         }
+
+        /** This variable is available globally on all your views, and sub-views */
+        view()->share([
+            'supported_locale2kit' => $supported_locale2kit,
+            'app_locale' => $app_locale,
+            'app_locale_kit' => $supported_locale2kit[$app_locale],
+        ]);
 
         return $next($request);
     }

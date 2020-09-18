@@ -15,13 +15,14 @@
 $router = \Illuminate\Support\Facades\Route::getFacadeRoot();
 
 
-$router->get('/', 'MainController@create');
+$router->any('/', 'MainController@create');
 
-$router->get('/create/', '\Illuminate\Routing\RedirectController')->defaults('destination', '/')->defaults('status', 301);
-$router->post('/create/', 'MainController@create')->name('create');
+$router->any('/create/', 'MainController@create')->name('create');
 $router->any('/created/{secuuid}/', 'MainController@created')->name('created');
 $router->any('/show/{secuuid}/', 'MainController@show')->name('show');
 $router->any('/faq/', 'MainController@faq')->name('faq');
+$router->any('/about/', 'MainController@about')->name('about');
+
 
 //$router->get('/tst/', 'TstController@tst');
 

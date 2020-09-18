@@ -1,3 +1,9 @@
+@php
+    $app_name = config('app.name', 'Laravel');
+    $app_url = url('/');
+    $app_link = '<a href="'.$app_url.'">'.$app_name.'</a>';
+@endphp
+
 @extends('_layout')
 
 @section('before-container')
@@ -6,7 +12,7 @@
         <div class="row">
             <div class="col col-lg-1"></div>
             <div class="col-12 col-lg-10">
-                <h4 class="text-center text-darkblue">Защитите секретную информацию от сохранения в истории переписки!</h4>
+                <h4 class="text-center text-darkblue">{{__('t.welcome_title')}}</h4>
             </div>
             <div class="col col-lg-1"></div>
         </div>
@@ -16,18 +22,14 @@
 
 @section('content')
 
-    <p class="text-secondary text-justify">
-        Прежде чем отправлять через мессенджеры и/или эл.почту секретную информацию, воспользуйтесь <a href="{{url('/')}}">{{ config('app.name', 'Laravel') }}</a> для защиты данных.
-        Тогда в истории переписки сохранится только безопасная ссылка, по которой доступ
-        к данным ограничен по времени жизни и/или максимальному количеству показов.
-    </p>
+    <p class="text-secondary text-justify">@lang('t.welcome_message', ['app_name' => $app_name, 'app_url' => $app_url, 'app_link' => $app_link])</p>
 
     <form method="POST" action="{{ route('create') }}" autocomplete="off">
         @csrf
 
         @if ($errors->any())
             <div class="alert alert-danger" role="alert">
-                <h5 class="alert-heading">Поправьте ошибки и попробуйте снова:</h5>
+                <h5 class="alert-heading">@lang('t.fix_errors_and_try_again')</h5>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -43,7 +45,7 @@
                 class="form-control @error($inm) is-invalid @enderror"
                 autocomplete="nope"
                 rows="7"
-                placeholder="Введите сюда любой текст, который хотите защитить перед отправкой..."
+                placeholder="{{__('t.input_here_any_text')}}"
             >{{ $ivl }}</textarea>
 
             @error($inm)<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
@@ -59,7 +61,7 @@
                        class="form-control @error($inm) is-invalid @enderror"
                        autocomplete="new-password"
                        data-lpignore="true"
-                       placeholder="Или сюда пароль..."
+                       placeholder="{{__('t.or_password_here')}}"
                 />
                 <div class="input-group-append">
                     <button id="shdpass" class="btn @if ($errors->has($inm)) btn-outline-danger @else btn-outline-secondary @endif px-1 py-1" type="button">@svg('eye-open')@svg('eye-slash','d-none')</button>
@@ -74,7 +76,7 @@
         <div class="card">
             <div class="card-header py-2 px-3">
                 <button class="btn btn-link p-0 text-secondary" type="button" data-toggle="collapse" data-target="#opts" aria-expanded="true" aria-controls="opts">
-                    Опции доступа к защищенным данным
+                    {{__('t.access_options_to_protected_data')}}
                 </button>
             </div>
             <div class="card-body collapse show" id="opts">
@@ -84,7 +86,7 @@
                     <div class="col-12 col-sm">
                         <select name="{{$inm}}" id="{{$inm}}" class="form-control @error($inm) is-invalid @enderror">
 {{--                                    <option value="" {{ ($ivl === null) ? 'selected' : '' }}>---</option>--}}
-                            @foreach($maxShowCount2Label AS $value => $label)
+                            @foreach($max_show_count2label AS $value => $label)
                                 <option value="{{$value}}" {{ ($ivl === $value) ? 'selected' : '' }}>{{$label}}</option>
                             @endforeach
                         </select>
@@ -111,7 +113,7 @@
                     <div class="col-12 col-sm">
                         <select name="{{$inm}}" id="{{$inm}}" class="form-control @error($inm) is-invalid @enderror">
 {{--                                    <option value="" {{ ($ivl === null) ? 'selected' : '' }}>---</option>--}}
-                            @foreach($lifetimeValue2Label AS $value => $label)
+                            @foreach($lifetime_value2label AS $value => $label)
                                 <option value="{{$value}}" {{ ($ivl === $value) ? 'selected' : '' }}>{{$label}}</option>
                             @endforeach
                         </select>
@@ -135,13 +137,12 @@
         </div>
 
         <div class="form-group mt-3">
-            <button class="btn btn-block btn-primary" type="submit">Создать безопасную ссылку для<br/>доступа к защищенным данным</button>
+            <button class="btn btn-block btn-primary" type="submit">@lang('t.create_secret_link')</button>
         </div>
     </form>
 
-{{--    <p>Обратите внимание! При передаче пароля через <a href="{{url('/')}}">{{ config('app.name', 'Laravel') }}</a> пожалуйста пересылайте <b><u>только!</u></b> пароль, а прочие данные необходимые для доступа (адрес сервиса и логин) передавайте пожалуйста через другой канал связи (например непосредственно напрямую в чате)</p>--}}
+    {{--    <p>Обратите внимание! При передаче пароля через <a href="{{url('/')}}">{{ config('app.name', 'Laravel') }}</a> пожалуйста пересылайте <b><u>только!</u></b> пароль, а прочие данные необходимые для доступа (адрес сервиса и логин) передавайте пожалуйста через другой канал связи (например непосредственно напрямую в чате)</p>--}}
 
-{{--    <p>If this is your first visit, click here To read the FAQ (Frequently Asked Questions).</p>--}}
-{{--    <p>Если это ваш первый визит, нажмите здесь Чтобы прочитать FAQ (часто задаваемые вопросы).</p>--}}
+    <p>@lang('t.if_this_is_your_first_visit')</p>
 
 @endsection

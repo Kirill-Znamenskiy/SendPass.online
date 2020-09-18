@@ -10,43 +10,45 @@ $app_url = url('/');
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <title>@yield('meta_title', __('t.default_meta_title',['app_name' => $app_name, 'app_url' => $app_url]))</title>
-    <meta name="keywords" content="@yield('meta_keywords',__('t.default_meta_keywords',['app_name' => $app_name, 'app_url' => $app_url]))"/>
-    <meta name="description" content="@yield('meta_description',__('t.default_meta_description',['app_name' => $app_name, 'app_url' => $app_url]))"/>
+    <title>@yield('meta_title', __('t.default_meta_title', ['app_name' => $app_name, 'app_url' => $app_url]))</title>
+    <meta name="keywords" content="@yield('meta_keywords', __('t.default_meta_keywords', ['app_name' => $app_name, 'app_url' => $app_url]))"/>
+    <meta name="description" content="@yield('meta_description', __('t.default_meta_description', ['app_name' => $app_name, 'app_url' => $app_url]))"/>
+    <link rel="canonical" href="{{canonicalizer()->get_canonical_url()}}"/>
+    {{--<link rel="canonical" href="_get_canonical_url_from_canonicalizer_"/>--}}
 
 
     <meta name="application-name" content="{{$app_name}}">
     <meta name="theme-color" content="#ffffff">
 
     <!-- favicons -->
-    <link rel="shortcut icon" href="/favicons/favicon.ico?v=Gvb0oRr33W">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png?v=Gvb0oRr33W">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png?v=Gvb0oRr33W">
-    <link rel="icon" type="image/png" sizes="194x194" href="/favicons/favicon-194x194.png?v=Gvb0oRr33W">
+    <link rel="shortcut icon" href="/icons/favicon.ico?v=Gvb0oRr33W">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png?v=Gvb0oRr33W">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png?v=Gvb0oRr33W">
+    <link rel="icon" type="image/png" sizes="194x194" href="/icons/favicon-194x194.png?v=Gvb0oRr33W">
 
     <!-- icons for ios -->
-    <meta name="apple-mobile-web-app-title" content="SendPass">
-    <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png?v=Gvb0oRr33W">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png?v=Gvb0oRr33W">
+    <meta name="apple-mobile-web-app-title" content="{{$app_name}}">
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-touch-icon-57x57.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-touch-icon-72x72.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-touch-icon-76x76.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-touch-icon-114x114.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-touch-icon-120x120.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-touch-icon-144x144.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-touch-icon-152x152.png?v=Gvb0oRr33W">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon-180x180.png?v=Gvb0oRr33W">
 
     <!-- icons for android -->
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png?v=Gvb0oRr33W">
-    <link rel="manifest" href="/favicons/site.webmanifest?v=Gvb0oRr33W">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-chrome-192x192.png?v=Gvb0oRr33W">
+    <link rel="manifest" href="/icons/site.webmanifest?v=Gvb0oRr33W">
 
     <!-- icons for microsoft -->
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png?v=Gvb0oRr33W">
-    <meta name="msapplication-config" content="/favicons/browserconfig.xml?v=Gvb0oRr33W">
+    <meta name="msapplication-TileImage" content="/icons/mstile-144x144.png?v=Gvb0oRr33W">
+    <meta name="msapplication-config" content="/icons/browserconfig.xml?v=Gvb0oRr33W">
 
     <!-- icons for safari -->
-    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg?v=Gvb0oRr33W" color="#2b5797">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg?v=Gvb0oRr33W" color="#2b5797">
 
 
     <!-- CSRF Token -->
@@ -161,8 +163,9 @@ $app_url = url('/');
                 <div class="navbar-collapse collapse" id="navbar-elements-content"  data-parent="#navbar-container">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item {{ Request::is('/') ? 'active' : '' }}"><a class="nav-link text-capitalize" href="{{$app_url}}">{{__('t.protect')}}</a></li>
+                        <li class="nav-item {{ Request::routeIs('about') ? 'active' : '' }}"><a class="nav-link text-capitalize" href="{{route('about')}}">{{__('t.about')}}</a></li>
                         <li class="nav-item {{ Request::routeIs('faq') ? 'active' : '' }}"><a class="nav-link text-capitalize" href="{{route('faq')}}">{{__('t.faq')}}</a></li>
+                        <li class="nav-item {{ Request::is('/') ? 'active' : '' }}"><a class="nav-link text-capitalize" href="{{$app_url}}">{{__('t.protect')}}</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -243,24 +246,20 @@ $app_url = url('/');
     <footer class="d-block bg-darkblue text-white py-3 mt-auto">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-sm-4">
-{{--                    FOOTER--}}
-                    <div class="mmnt-date-time">{{\Illuminate\Support\Carbon::now()->toIso8601String()}}</div>
-
-                </div>
-                <div class="col-12 col-sm-4">
+                <div class="col-12 col-sm-8">
+                    <div><a class="github" target="_blank" href="https://github.com/kirill-znamenskiy/sendpass.online">@svg('bs/github') GitHub</a></div>
+                    <div class="mt-1" style="line-height:1.1;">
+                        <span class="mmnt-date-time">{{\Illuminate\Support\Carbon::now()->toIso8601String()}}</span>
+                        <br/>
+                        <small class="text-white-50">git show: {{$git_show}}</small>
+                    </div>
                 </div>
                 <div class="col-12 col-sm-4 text-center text-sm-right">
                     <a class="navbar-brand sendpass-brand mr-0" href="{{ $app_url }}">
-                        <img src="/logo-inverted-64.svg" width="32px" height="32px" onerror="this.onerror=null;this.src='/logo-inverted-64.png';" style="width:auto;height:auto;max-height:2.5rem;" class="d-inline-block" alt="{{ $app_name }}">
+                        <img src="/logo-inverted-64.svg" width="32px" height="32px" onerror="this.onerror=null;this.src='/logo-inverted-64.png';"class="d-inline-block" alt="{{ $app_name }}">
                         <span class="text-white">{{ $app_name }}</span>
                     </a>
                     <div>© 2020 @php echo ((intval(date('Y')) > 2020) ? ' - '.intval(date('Y')) : '') @endphp</div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col text-white-50 text-center">
-                    <small>@lang('t.keep_it_secret_keep_it_safe')</small>
                 </div>
             </div>
         </div>

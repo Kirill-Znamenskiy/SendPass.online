@@ -1,12 +1,12 @@
 <?php
 require(__DIR__.'/vendor/autoload.php');
 
-$csh = \kz\console_tools\ConsoleScriptHelper::create()->start_script();
+$csh = \KZ\ConsoleTools\ConsoleScriptHelper::create()->start_script();
 
 $csh->make_symlinks([
-    './public/favicon.ico' => './favicons/favicon.ico',
-    './public/apple-touch-icon.png' => './favicons/apple-touch-icon.png',
-    './public/apple-touch-icon-precomposed.png' => './favicons/apple-touch-icon-precomposed.png',
+    './public/favicon.ico' => './icons/favicon.ico',
+    './public/apple-touch-icon.png' => './icons/apple-touch-icon.png',
+    './public/apple-touch-icon-precomposed.png' => './icons/apple-touch-icon-precomposed.png',
 
     './public/icon.svg' => './logos/logo-64x64.svg',
     './public/icon.png' => './logos/logo-64x64.png',
@@ -45,8 +45,6 @@ $csh->exec_commands([
 
     $csh::commands_git_config_for_commits(),
     $csh::commands_git_commit_and_push(),
-
-    //$csh::commands_composer_update(),
 ]);
 
 
