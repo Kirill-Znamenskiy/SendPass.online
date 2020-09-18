@@ -26,7 +26,7 @@ return [
     'or_password_here' => 'Или сюда пароль...',
     'fix_errors_and_try_again' => 'Поправьте ошибки и попробуйте снова:',
     'create_secret_link' => 'Создать безопасную ссылку для<br/>доступа к защищенным данным',
-    'if_this_is_your_first_visit' => 'Если это Ваш первый визит, прочитайте <a target="_blank" href="/faq/">F.A.Q.</a>',
+    'if_this_is_your_first_visit' => 'Если это Ваш первый визит, прочитайте <a href="/faq/">F.A.Q.</a>',
 
 
     // other

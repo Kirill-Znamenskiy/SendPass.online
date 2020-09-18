@@ -21,7 +21,7 @@ return [
     'or_password_here' => 'Or password here...',
     'fix_errors_and_try_again' => 'Fix errors and try again:',
     'create_secret_link' => 'Create secret access link',
-    'if_this_is_your_first_visit' => 'If this is your first visit, read the <a target="_blank" href="/faq/">F.A.Q.</a>',
+    'if_this_is_your_first_visit' => 'If this is your first visit, read the <a href="/faq/">F.A.Q.</a>',
 
 
     // other
