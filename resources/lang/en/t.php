@@ -7,12 +7,19 @@ return [
     'default_meta_keywords' => ':app_name',
     'default_meta_description' => ':app_name is a service to securely send passwords over the insecure channels. Access will automatically expire after a certain number of shows and/or time has passed.',
 
+    // menu
     'protect' => 'Protect',
     'faq' => 'F.A.Q.',
-    'frequently_asked_questions' => 'Frequently Asked Questions',
+
+
+    'welcome_title' => 'Protect sensitive info from saving in email and chat logs.',
+    'welcome_message' => '',
     'access_options_to_protected_data' => 'Access options to protected data',
     'input_here_any_text' => 'Input here any text for protected before sending...',
     'or_password_here' => 'Or password here...',
+    'fix_errors_and_try_again' => 'Fix errors and try again:',
+    'create_secret_link' => 'Create secret access link',
+    'if_this_is_your_first_visit' => 'If this is your first visit, read the <a target="_blank" href="/faq/">F.A.Q.</a>',
 
     'time' => ':count time|:count times',
     'minute' => ':count minute|:count minutes',

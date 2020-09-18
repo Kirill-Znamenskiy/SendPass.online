@@ -1,5 +1,7 @@
 <?php
 return [
+    'frequently_asked_questions' => 'Frequently Asked Questions',
+
     'question1' => 'I don\'t get it. What is this for?',
     'answer1' => '
 <br/>SendPass exists as a better alternative to emailing passwords.

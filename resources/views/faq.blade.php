@@ -7,7 +7,7 @@
 @extends('_layout')
 
 @section('meta_title')
-    {{$app_name.' - '.__('t.frequently_asked_questions')}}
+    {{$app_name.' - '.__('faq.frequently_asked_questions')}}
 @endsection
 
 
@@ -19,7 +19,7 @@
             <div class="col-12 col-md-10">
 
                 <div class="card faq">
-                    <h1 class="card-header h4">{{__('t.frequently_asked_questions')}}</h1>
+                    <h1 class="card-header h4">{{__('faq.frequently_asked_questions')}}</h1>
                     <div class="card-body">
 
                         {{--            <h3 class="h5">Collapsible Group Item #1 <small class="text-muted">With faded secondary text</small></h3>--}}

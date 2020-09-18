@@ -1,6 +1,8 @@
 <?php
 // 'key' => null, // mean fallback to English translation
 return [
+    'frequently_asked_questions' => 'Часто Задаваемые Вопросы',
+
     'question1' => 'Ничего не понимаю, что это за проект?',
     'answer1' => '
         :app_link позволяет избежать бессрочного хранения паролей в архивах эл.почты или мессенджера.
