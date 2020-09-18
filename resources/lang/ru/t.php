@@ -10,7 +10,7 @@ return [
 
     // menu
     'protect' => 'Защитить',
-    'about' => 'О проекте',
+    'about' => 'О Проекте',
     'faq' => null,
 
 
