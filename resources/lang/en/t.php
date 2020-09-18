@@ -9,9 +9,11 @@ return [
 
     // menu
     'protect' => 'Protect',
+    'about' => 'About',
     'faq' => 'F.A.Q.',
 
 
+    // create(main-page)
     'welcome_title' => 'Protect sensitive info from saving in email and chat logs.',
     'welcome_message' => '',
     'access_options_to_protected_data' => 'Access options to protected data',
@@ -21,6 +23,8 @@ return [
     'create_secret_link' => 'Create secret access link',
     'if_this_is_your_first_visit' => 'If this is your first visit, read the <a target="_blank" href="/faq/">F.A.Q.</a>',
 
+
+    // other
     'time' => ':count time|:count times',
     'minute' => ':count minute|:count minutes',
     'hour' => ':count hour|:count hours',

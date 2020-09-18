@@ -8,9 +8,13 @@ return [
     'default_meta_keywords' => null,
     'default_meta_description' => null,
 
+    // menu
     'protect' => 'Защитить',
+    'about' => 'О проекте',
     'faq' => null,
 
+
+    // create(main-page)
     'welcome_title' => 'Защитите секретную информацию от сохранения в истории переписки!',
     'welcome_message' => '
         Прежде чем отправлять через мессенджеры и/или эл.почту секретную информацию, воспользуйтесь :app_link для защиты данных.
@@ -24,6 +28,8 @@ return [
     'create_secret_link' => 'Создать безопасную ссылку для<br/>доступа к защищенным данным',
     'if_this_is_your_first_visit' => 'Если это Ваш первый визит, прочитайте <a target="_blank" href="/faq/">F.A.Q.</a>',
 
+
+    // other
     'time' => ':count раз|:count раза|:count раз',
     'minute' => ':count минута|:count минуты|:count минут',
     'hour' => ':count час|:count часа|:count часов',
