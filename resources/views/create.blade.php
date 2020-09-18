@@ -137,12 +137,12 @@
         </div>
 
         <div class="form-group mt-3">
-            <button class="btn btn-block btn-primary" type="submit">@lang('create_secret_link')</button>
+            <button class="btn btn-block btn-primary" type="submit">@lang('t.create_secret_link')</button>
         </div>
     </form>
 
     {{--    <p>Обратите внимание! При передаче пароля через <a href="{{url('/')}}">{{ config('app.name', 'Laravel') }}</a> пожалуйста пересылайте <b><u>только!</u></b> пароль, а прочие данные необходимые для доступа (адрес сервиса и логин) передавайте пожалуйста через другой канал связи (например непосредственно напрямую в чате)</p>--}}
 
-    <p>@lang('if_this_is_your_first_visit')</p>
+    <p>@lang('t.if_this_is_your_first_visit')</p>
 
 @endsection
