@@ -218,9 +218,15 @@ class MainController extends BaseController
         return view('show', $view_params);
     }
 
+    public function about(Request $request) {
+        canonicalizer()->set_path('/about/');
+        return view('about');
+    }
 
     public function faq(Request $request) {
         canonicalizer()->set_path('/faq/');
         return view('faq');
     }
+
+
 }
