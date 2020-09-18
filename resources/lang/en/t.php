@@ -14,7 +14,7 @@ return [
 
 
     // create(main-page)
-    'welcome_title' => 'Protect sensitive info from saving in email and chat logs.',
+    'welcome_title' => 'Protect your sensitive info from saving in email and chat logs.',
     'welcome_message' => '',
     'access_options_to_protected_data' => 'Access options to protected data',
     'input_here_any_text' => 'Input here any text for protected before sending...',
