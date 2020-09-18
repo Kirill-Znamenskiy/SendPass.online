@@ -163,8 +163,9 @@ $app_url = url('/');
                 <div class="navbar-collapse collapse" id="navbar-elements-content"  data-parent="#navbar-container">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item {{ Request::is('/') ? 'active' : '' }}"><a class="nav-link text-capitalize" href="{{$app_url}}">{{__('t.protect')}}</a></li>
+                        <li class="nav-item {{ Request::routeIs('about') ? 'active' : '' }}"><a class="nav-link text-capitalize" href="{{route('about')}}">{{__('t.about')}}</a></li>
                         <li class="nav-item {{ Request::routeIs('faq') ? 'active' : '' }}"><a class="nav-link text-capitalize" href="{{route('faq')}}">{{__('t.faq')}}</a></li>
+                        <li class="nav-item {{ Request::is('/') ? 'active' : '' }}"><a class="nav-link text-capitalize" href="{{$app_url}}">{{__('t.protect')}}</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
