@@ -22,7 +22,7 @@
                     <h1 class="card-header h4">{{__('about.about_project', ['app_name' => $app_name, 'app_url' => $app_url, 'app_link' => $app_link])}}</h1>
                     <div class="card-body">
 
-                        {{__('about.main_content', ['app_name' => $app_name, 'app_url' => $app_url, 'app_link' => $app_link])}}
+                        @lang('about.main_content', ['app_name' => $app_name, 'app_url' => $app_url, 'app_link' => $app_link])
 
 
                     </div>
