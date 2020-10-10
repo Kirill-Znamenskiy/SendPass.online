@@ -267,5 +267,6 @@ $app_url = url('/');
 
     </footer>
 
+
 </body>
 </html>
