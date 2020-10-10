@@ -62,22 +62,20 @@ $app_url = url('/');
 
 
     <!-- Scripts -->
-    <script>
-        window.app_locale = "{{$app_locale}}";
-    </script>
+    <script>window.app_locale = "{{$app_locale}}";</script>
     {{--    <script src="{{ mix('/llmix/manifest.js') }}" async></script>--}}
     {{--    <script src="{{ mix('/llmix/vendor.js') }}" async></script>--}}
     <script src="{{ mix('/llmix/app.js') }}" async></script>
 
 
     <!-- Styles -->
-{{--    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet';" href="{{ mix('/llmix/bootstrap.css') }}">--}}
-{{--    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet';" href="{{ mix('/llmix/fontawesome.css') }}">--}}
-    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet';" href="{{ mix('/llmix/app.css') }}">
+{{--    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet';" href="{{ mix('/llmix/bootstrap.css') }}"/>--}}
+{{--    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet';" href="{{ mix('/llmix/fontawesome.css') }}"/>--}}
+    <link rel="stylesheet" href="{{ mix('/llmix/app.css') }}" media="print" onload="this.onload=null;this.media='all';"/>
     <noscript>
-{{--        <link rel="stylesheet" href="{{ mix('/llmix/bootstrap.css') }}">--}}
-{{--        <link rel="stylesheet" href="{{ mix('/llmix/fontawesome.css') }}">--}}
-        <link rel="stylesheet" href="{{ mix('/llmix/app.css') }}">
+{{--        <link rel="stylesheet" href="{{ mix('/llmix/bootstrap.css') }}" media="all"/>--}}
+{{--        <link rel="stylesheet" href="{{ mix('/llmix/fontawesome.css') }}" media="all"/>--}}
+        <link rel="stylesheet" href="{{ mix('/llmix/app.css') }}" media="all"/>
     </noscript>
 
 
@@ -123,10 +121,13 @@ $app_url = url('/');
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJNF7MH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <div class="loading">
-        <div class="pre-spinner d-none" role="status"><span>Loading...</span></div>
-        <div class="pst-spinner d-block spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>
-    </div>
+{{--    <div class="loading">--}}
+{{--        <div class="pre-spinner d-none" role="status"><span>Loading...</span></div>--}}
+{{--        <div class="pst-spinner d-block spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>--}}
+{{--    </div>--}}
+
+    <div class="css-loaded d-block">CSS-LOADED</div>
+    <div class="js-loaded">JS-LOADED</div>
 
     <header class="d-block bg-white">
         <nav class="navbar sticky-top navbar-expand-sm navbar-light shadow-sm">
@@ -265,11 +266,6 @@ $app_url = url('/');
         </div>
 
     </footer>
-
-
-{{--    <div class="css-loaded d-block">CSS-LOADED</div>--}}
-{{--    <div class="js-loaded">JS-LOADED</div>--}}
-
 
 </body>
 </html>
