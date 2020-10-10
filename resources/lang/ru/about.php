@@ -17,12 +17,11 @@ return [
         <h4 class="my-0">Участники проекта</h4>
         Следующие люди принимали участие в развитии проекта SendPass - тестировали, помогали понятнее описать проект, 
         улучшить юзабилити, занимались переводом интерфейса и т.д. Благодарю каждого:
-        <ul>
-            <li>Gtskshbs</li>
-            <li>Jahsdvege</li>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Gtskshbs</li>
+            <li class="list-group-item">Jahsdvege</li>
         </ul>
-        <br/>
-        <br/>Вы тоже можете поучаствовать в развитии проекта, присылайте свою обратную связь на feedback@SendPass.online
+        <br/>Вы тоже можете поучаствовать в развитии проекта, пишите на feedback@SendPass.online
 
     ',
 ];

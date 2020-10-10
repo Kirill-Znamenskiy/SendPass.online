@@ -29,15 +29,15 @@ $csh->make_symlinks([
 
 ]);
 
-$csh->exec_commands([
-    $csh->commands_chdir(),
-
-    'npm run production',
-
-    'php artisan ide-helper:generate --ansi',
-    'php artisan ide-helper:meta --ansi',
-    //'php artisan ide-helper:models --ansi -N --no-interaction',
-]);
+//$csh->exec_commands([
+//    $csh->commands_chdir(),
+//
+//    'npm run production',
+//
+//    'php artisan ide-helper:generate --ansi',
+//    'php artisan ide-helper:meta --ansi',
+//    //'php artisan ide-helper:models --ansi -N --no-interaction',
+//]);
 
 $csh->check_git_problems();
 $csh->exec_commands([
