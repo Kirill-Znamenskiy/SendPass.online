@@ -121,13 +121,13 @@ $app_url = url('/');
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJNF7MH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-{{--    <div class="loading">--}}
-{{--        <div class="pre-spinner d-none" role="status"><span>Loading...</span></div>--}}
-{{--        <div class="pst-spinner d-block spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>--}}
-{{--    </div>--}}
+    <div class="loading">
+        <div class="pre-spinner d-none" role="status"><span>Loading...</span></div>
+        <div class="pst-spinner d-block spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>
+    </div>
 
-    <div class="css-loaded d-block">CSS-LOADED</div>
-    <div class="js-loaded">JS-LOADED</div>
+{{--    <div class="css-loaded d-block">CSS-LOADED</div>--}}
+{{--    <div class="js-loaded">JS-LOADED</div>--}}
 
     <header class="d-block bg-white">
         <nav class="navbar sticky-top navbar-expand-sm navbar-light shadow-sm">
