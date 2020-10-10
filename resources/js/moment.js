@@ -80,7 +80,7 @@ window.moment.load_locale = function() {
     }
     locales = locales2;
 
-    // console.log("moment load locales="+locales);
+    console.log("to-moment-locales: "+locales);
 
 
 
