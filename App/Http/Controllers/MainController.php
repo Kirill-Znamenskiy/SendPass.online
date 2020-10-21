@@ -194,7 +194,10 @@ class MainController extends BaseController
                 'crr_show_count' => ['required','integer','lte:max_show_count'],
                 'expired_at' => ['required','after:now'],
             ];
-            $validator = validator($validation_data,$validation_rules);
+            $validation_messages = [
+                'crr_show_count.lte' => __('validation.custom.crr_show_count.lte').($secret->is_hide_show_count ? '' : ' ('.$secret->max_show_count.')')
+            ];
+            $validator = validator($validation_data, $validation_rules, $validation_messages);
             //if ($validator->fails()) {
             //    return redirect('post/create')
             //        ->withErrors($validator)
