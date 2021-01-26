@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c1dac46425f13ca58a1e0125ed1bb81d",
+    "content-hash": "82b4f1969fe706c09ca8d7cae53d633a",
     "packages": [
         {
             "name": "brick/math",
@@ -549,20 +549,19 @@
             ]
         },
         {
-            "name": "kirill-znamenskiy/my-ll-components",
-            "version": "v1.1.1.20210126201404",
+            "name": "kirill-znamenskiy/my-components",
+            "version": "v1.1.1.20210126203724",
             "dist": {
                 "type": "tar",
-                "url": "https://comprepo.kirill.znamenskiy.pw/kirill-znamenskiy-my-ll-components-v1.1.1.tar?YmdHis=20210126201404"
+                "url": "https://comprepo.kirill.znamenskiy.pw/kirill-znamenskiy-my-components-v1.1.1.tar?YmdHis=20210126203724"
             },
             "require": {
-                "laravel/framework": ">=7.0",
                 "php": ">=5.3.0"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "KZ\\LlComponents\\": "src/"
+                    "KZ\\MyComponents\\": "src/"
                 }
             },
             "authors": [
@@ -571,11 +570,9 @@
                     "email": "Kirill@Znamenskiy.pw"
                 }
             ],
-            "description": "My personal components for Laravel messy. When become vision they will migrate to another package, or create new package.",
+            "description": "My personal messy components/elements. When become vision they will migrate to another package or create new package.",
             "keywords": [
-                "kz",
-                "laravel",
-                "ll"
+                "kz"
             ]
         },
         {
@@ -7567,12 +7564,12 @@
             "version": "1.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "shasum": ""
             },
