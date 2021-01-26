@@ -131,7 +131,7 @@ return [
 
     'custom' => [
         'crr_show_count' => [
-            'lte' => 'Protected data already show max count(":value")!',
+            'lte' => 'Protected data already show max count!',
         ],
         'expired_at' => [
             'after' => 'The life time of protected data expired',
