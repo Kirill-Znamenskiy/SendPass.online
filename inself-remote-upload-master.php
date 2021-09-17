@@ -6,7 +6,7 @@ require(__DIR__.'/inself-local-commit-and-push.php');
 $csh = \KZ\ConsoleTools\ConsoleScriptHelper::create()->start_script();
 
 
-if (!isset($remote_sshost)) $remote_sshost = ['vv','rr.zkiy.ru',222];
+if (!isset($remote_sshost)) $remote_sshost = ['vv','a6.zkiy.ru',222];
 if (!isset($remote_project_dir_path)) $remote_project_dir_path = '/home/vv/sendpass.online';
 if (!isset($remote_cd_command)) $remote_cd_command = 'cd '.$remote_project_dir_path.';';
 if (!isset($remote_branch_name)) $remote_branch_name = 'master';
@@ -15,7 +15,7 @@ if (!isset($is_with_composer_update)) $is_with_composer_update = false;
 
 $csh->exec_commands([
     //'rsync -av -e "ssh -p 222" vv@rr.zkiy.ru:'.$remote_project_dir_path.'/.env /Users/hw/Projects/sendpass.online/.env.at.vv.rr.zkiy.ru',
-    'rsync -av -e "ssh -p 222" /Users/hw/Projects/sendpass.online/.env.remote.'.$remote_branch_name.' vv@rr.zkiy.ru:'.$remote_project_dir_path.'/.env',
+    'rsync -av -e "ssh -p 222" /Users/hw/Projects/sendpass.online/.env.remote.'.$remote_branch_name.' vv@a6.zkiy.ru:'.$remote_project_dir_path.'/.env',
 ]);
 
 
