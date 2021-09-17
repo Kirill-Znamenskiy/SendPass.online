@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use KZ\Func\Func;
+use KZ\Assist\Func;
 use KZ\Illuminate\Routing\Canonicalizer;
 use KZ\Illuminate\Support\Cast;
 use KZ\Illuminate\Support\RegExp;
