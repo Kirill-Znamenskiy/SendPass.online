@@ -5,7 +5,6 @@ services:
     build: &base-build
       context: ./..
       dockerfile: ./docker-compose/php-fpm/Dockerfile
-      target: nonexistent
       args:
         ENV: ${ENV:-UNKNOWN}
         GIT_SHOW_VERSION: ${GIT_SHOW_VERSION:-UNKNOWN}
