@@ -39,7 +39,7 @@ build-job:
 
 tests:
   stage: test
-  image: golang:alpine
+  image: alpine
   environment: $ENV
   script:
     - /bin/true
