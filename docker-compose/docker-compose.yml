@@ -1,0 +1,38 @@
+version: '3.6'
+
+services:
+  base: &base
+    build: &base-build
+      context: ./..
+      dockerfile: ./docker-compose/php-fpm/Dockerfile
+      target: nonexistent
+      args:
+        ENV: ${ENV:-UNKNOWN}
+        GIT_SHOW_VERSION: ${GIT_SHOW_VERSION:-UNKNOWN}
+    environment:
+      ENV: ${ENV:-UNKNOWN}
+      SERVER_ADDRESS: 0.0.0.0:8888
+      # Follow env variables, should be defined in GitLab CI/CD variables.
+      DATABASE_URI: ${DATABASE_URI:-}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    deploy:
+      restart_policy:
+        delay: 15s
+        window: 15s
+        max_attempts: 3
+        condition: on-failure
+
+  php-fpm:
+    <<: *base
+
+  base-php-fpm:
+    image: php:8.1-fpm
+    command: sleep 33h
+
+networks:
+  default:
+    name: ${COMPOSE_PROJECT_NAME}
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: ${COMPOSE_PROJECT_NAME}
