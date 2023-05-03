@@ -90,36 +90,12 @@ COPY ./docker-compose/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 WORKDIR /wrkdir
 USER wrkuser:wrkgroup
 ENTRYPOINT ["/bin/sh", "-xc"]
-#CMD [ "/bin/sleep", "777d" ]
+CMD [ "/bin/sleep", "777d" ]
 #CMD [ "/usr/local/sbin/php-fpm", "-F" ]
-CMD [ "set -xe \
-    && cd /wrkdir/sites/SendPass.online \
-    \
-    && mkdir -p ./runtime \
-    && find ./runtime -type f -exec chmod 0664 {} \; \
-    && find ./runtime -type d -exec chmod 0775 {} \; \
-    \
-    && mkdir -p ./storage \
-        ./storage/framework \
-        ./storage/framework/logs \
-        ./storage/framework/cache \
-        ./storage/framework/views \
-        ./storage/framework/sessions \
-    \
-    && find ./storage -type f -exec chmod 0664 {} \; \
-    && find ./storage -type d -exec chmod 0775 {} \; \
-    \
-    && mkdir -p ./bootstrap/cache \
-    && find ./bootstrap/cache -type f -exec chmod 0664 {} \; \
-    && find ./bootstrap/cache -type d -exec chmod 0775 {} \; \
-    \
-    && ./artisan config:clear \
-    && rm ./bootstrap/cache/config.php || true \
-    && ./artisan config:cache \
-    \
-    && ./artisan route:clear \
-    && ./artisan route:cache \
-    \
-    && /usr/local/sbin/php-fpm -F \
-    && set +xe \
-" ]
+#CMD [ "set -xe \
+#    && cd /wrkdir/sites/SendPass.online \
+#    && /bin/bash init.bash \
+#    \
+#    && /usr/local/sbin/php-fpm -F \
+#    && set +xe \
+#" ]
