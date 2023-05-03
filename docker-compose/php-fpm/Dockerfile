@@ -16,8 +16,9 @@ RUN set -xe \
         anacron \
     && apt-get remove --purge --auto-remove -y \
     && rm -rf /var/lib/apt-get/lists/* /var/lib/apt/lists/* /tmp/* /usr/share/man/?? /usr/share/man/??_* \
-    && docker-php-ext-install -j$(nproc) pdo_pgsql \
     && set +xe
+
+#    && docker-php-ext-install -j$(nproc) pdo_pgsql
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
