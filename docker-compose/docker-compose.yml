@@ -25,7 +25,7 @@ services:
   php-fpm:
     <<: *base
     volumes:
-      - /home/kz/sites/SendPass.online:/wrkdir/sites/:rw
+      - /home/kz/sites/SendPass.online:/wrkdir/sites/SendPass.online:rw
 
   base-php-fpm:
     image: php:8.1-fpm
