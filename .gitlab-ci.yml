@@ -14,9 +14,9 @@ workflow:
     - if: $CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH =~ /^dev-/
       variables:
         ENV: DEV
-#    - if: $CI_COMMIT_TAG # deploy prod by tag
-#      variables:
-#        ENV: PROD
+    - if: $CI_COMMIT_TAG # deploy prod by tag
+      variables:
+        ENV: PROD
     - if: $CI_COMMIT_BRANCH == "master" # deploy prod by any commit in master branch
       variables:
         ENV: PROD
