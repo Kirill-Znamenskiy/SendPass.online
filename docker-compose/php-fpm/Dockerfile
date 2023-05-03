@@ -94,13 +94,13 @@ CMD [ "/bin/sleep", "777d" ]
 ############################################################################
 FROM base AS work
 WORKDIR /wrkdir
-USER wrkuser:wrkgroup
+USER root:root
 ENTRYPOINT ["/bin/sh", "-xec"]
 #CMD [ "/bin/sleep 777d" ]
 #CMD [ "/usr/local/sbin/php-fpm", "-F" ]
 CMD [ "/bin/true \
     && cd /wrkdir/sites/SendPass.online \
-    && bash init.bash \
+    && su -l wrkuser bash init.bash \
     \
     && php-fpm -F \
 " ]
