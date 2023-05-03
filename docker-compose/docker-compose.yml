@@ -1,0 +1,44 @@
+version: '3.6'
+
+services:
+  base: &base
+    build: &base-build
+      context: ./..
+      dockerfile: ./docker-compose/php-fpm/Dockerfile
+      target: nonexistent
+      args:
+        ENV: ${ENV:-UNKNOWN}
+        GIT_SHOW_VERSION: ${GIT_SHOW_VERSION:-UNKNOWN}
+    environment:
+      ENV: ${ENV:-UNKNOWN}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    deploy:
+      restart_policy:
+        delay: 15s
+        window: 15s
+        max_attempts: 3
+        condition: on-failure
+
+  base-php-fpm:
+    <<: *base
+    build:
+      <<: *base-build
+      target: base
+    volumes:
+      - /home/kz/sites/SendPass.online:/wrkdir/sites/SendPass.online:rw
+
+  work-php-fpm:
+    <<: *base
+    build:
+      <<: *base-build
+      target: work
+    volumes:
+      - /home/kz/sites/SendPass.online:/wrkdir/sites/SendPass.online:rw
+
+networks:
+  default:
+    name: ${COMPOSE_PROJECT_NAME}
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: ${COMPOSE_PROJECT_NAME}

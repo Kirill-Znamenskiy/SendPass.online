@@ -46,7 +46,7 @@
 /update.lock.tmp
 
 /.env*
-!/.env.example
+!/.env.DEFAULT.env
 
 !.gitkeep
 
