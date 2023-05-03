@@ -53,44 +53,10 @@ RUN set -xe \
 
 COPY ./docker-compose/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 
+RUN set -xe \
+    && sed -i "s/{LISTEN_LINE}/listen = ./runtime/php-fpm.$ENV.sock/" /usr/local/etc/php-fpm.d/www.conf \
+    && set +xe
 
-
-## copy composer.(json|lock) files for dependencies layer caching
-#COPY --chown=wrkuser:wrkgroup ./composer.* ./
-## install composer dependencies (autoloader MUST be generated later!)
-#RUN set -xe \
-#    && composer install --no-interaction --no-dev --no-cache --no-ansi --no-autoloader --no-scripts --prefer-dist \
-#    && set +xe
-#
-## copy application sources into image (completely)
-#COPY --chown=wrkuser:wrkgroup . .
-#
-#
-#RUN set -xe \
-#    # generate composer autoloader and trigger scripts
-#    && composer dump-autoload --no-interaction --optimize \
-#    \
-#    && chmod u+x ./artisan \
-#    && chmod 0775 -R \
-#    \
-#    && find ./runtime -type d -exec chmod 0775 {} \; \
-#    && find ./runtime -type f -exec chmod 0664 {} \; \
-#    \
-#    && find ./storage -type d -exec chmod 0775 {} \; \
-#    && find ./storage -type f -exec chmod 0664 {} \; \
-#    \
-#    && find ./bootstrap/cache -type d -exec chmod 0775 {} \; \
-#    && find ./bootstrap/cache -type f -exec chmod 0664 {} \; \
-#    \
-#    && ./artisan config:clear \
-#    # // force config:clear
-#    && rm ./bootstrap/cache/config.php \
-#    && ./artisan config:cache \
-#    \
-#    && ./artisan route:clear \
-#    # not able closures routes, only controller based routes!
-#    && ./artisan route:cache \
-#    && set +xe
 
 WORKDIR /wrkdir
 USER root:root
