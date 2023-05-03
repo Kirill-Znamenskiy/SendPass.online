@@ -33,7 +33,7 @@ build-job:
     - export COMPOSE_PROJECT_NAME=$(echo "$PROJECT_NAME-$ENV" | awk '{print tolower($0)}')
     - docker-compose --file ./docker-compose/docker-compose.yml
       build --pull
-      -- base-php-fpm php-fpm
+      -- base-php-fpm work-php-fpm
 
 
 
@@ -54,7 +54,7 @@ deploy-job:
     - export COMPOSE_PROJECT_NAME=$(echo "$PROJECT_NAME-$ENV" | awk '{print tolower($0)}')
     - docker-compose --file ./docker-compose/docker-compose.yml
       up --detach --remove-orphans
-      -- base-php-fpm php-fpm
+      -- base-php-fpm work-php-fpm
 
 
 clean-job:
