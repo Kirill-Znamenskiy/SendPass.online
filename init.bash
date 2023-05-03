@@ -7,6 +7,10 @@ if test ! -f "./init.bash"; then
     exit
 fi
 
+composer self-update
+composer install --no-interaction --no-dev --no-cache --no-ansi --no-autoloader --no-scripts --prefer-dist
+composer dump-autoload --no-interaction --optimize
+
 mkdir -p ./runtime
 find ./runtime -type f -exec chmod 0664 {} \;
 find ./runtime -type d -exec chmod 0775 {} \;

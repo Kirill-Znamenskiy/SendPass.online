@@ -41,10 +41,6 @@ deploy() {
 
     set -xe
 
-    composer install --no-interaction --no-dev --no-cache --no-ansi --no-autoloader --no-scripts --prefer-dist
-
-    composer dump-autoload --no-interaction --optimize
-
     npm run production
 
     rsync -av $DRY_RUN --delete \

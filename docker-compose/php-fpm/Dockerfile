@@ -27,7 +27,7 @@ RUN set -xe \
     && adduser \
         --disabled-password \
         --shell "/sbin/nologin" \
-        --home "/nonexistent" \
+        --home "/wrkdir" \
         --no-create-home \
         --uid "${WRK_USER_ID}" \
         --ingroup wrkgroup \
