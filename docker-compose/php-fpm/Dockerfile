@@ -17,7 +17,6 @@ RUN set -xe \
         libpq-dev \
     \
     && docker-php-ext-install -j$(nproc) pdo_pgsql \
-    && apt-get remove -y libpq-dev \
     && apt-get remove -y --purge --auto-remove \
     && rm -rf /var/lib/apt-get/lists/* /var/lib/apt/lists/* /tmp/* /usr/share/man/?? /usr/share/man/??_* \
     && set +xe
@@ -93,19 +92,25 @@ COPY ./docker-compose/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 WORKDIR /wrkdir
 USER root:root
 ENTRYPOINT ["/bin/sh", "-xec"]
-CMD [ "/bin/sleep 777d" ]
-
-############################################################################
-FROM base AS work
-WORKDIR /wrkdir
-USER root:root
-ENTRYPOINT ["/bin/sh", "-xec"]
-#CMD [ "/bin/sleep 777d" ]
-#CMD [ "/usr/local/sbin/php-fpm", "-F" ]
 CMD [ "/bin/true \
     && chown wrkuser:wrkgroup -R /wrkdir \
     && cd /wrkdir/sites/SendPass.online \
     && su -s /bin/bash wrkuser init.bash \
     \
-    && php-fpm -F \
+    /bin/sleep 777d \
 " ]
+
+############################################################################
+FROM base AS work
+WORKDIR /wrkdir
+USER wrkuser:wrkgroup
+ENTRYPOINT []
+#CMD [ "/bin/sleep 777d" ]
+CMD [ "/usr/local/sbin/php-fpm", "-F" ]
+#CMD [ "/bin/true \
+#    && chown wrkuser:wrkgroup -R /wrkdir \
+#    && cd /wrkdir/sites/SendPass.online \
+#    && su -s /bin/bash wrkuser init.bash \
+#    \
+#    && php-fpm -F \
+#" ]
