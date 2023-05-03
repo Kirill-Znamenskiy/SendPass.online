@@ -54,7 +54,7 @@ RUN set -xe \
 COPY ./docker-compose/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 RUN set -xe \
-    && sed -i "s/{LISTEN_LINE}/listen = ./runtime/php-fpm.$ENV.sock/" /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i "s|{LISTEN_LINE}|listen = ./runtime/php-fpm.$ENV.sock|g" /usr/local/etc/php-fpm.d/www.conf \
     && set +xe
 
 
