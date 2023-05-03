@@ -90,4 +90,5 @@ USER wrkuser:wrkgroup
 
 
 ENTRYPOINT []
-CMD [ "/usr/local/sbin/php-fpm -F" ]
+#CMD [ "/usr/local/sbin/php-fpm -F" ]
+CMD [ "sleep 777d" ]
