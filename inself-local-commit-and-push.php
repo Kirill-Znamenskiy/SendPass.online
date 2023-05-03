@@ -25,8 +25,6 @@ $csh->make_symlinks([
     './public/logo-inverted-64.png' => './logos/logo-inverted-64x64.png',
     './public/logo-inverted-320.svg' => './logos/logo-inverted-320x320.svg',
     './public/logo-inverted-320.png' => './logos/logo-inverted-320x320.png',
-
-
 ]);
 
 $csh->exec_commands([

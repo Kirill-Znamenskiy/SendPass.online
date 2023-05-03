@@ -37,7 +37,7 @@ $csh->exec_commands_by_ssh($remote_sshost,[
     'chmod u+x ./artisan',
 
     $csh::commands_chmod_dirrs('./runtime','0775'),
-    //$csh::commands_chmod_files('./runtime','0664'),
+    $csh::commands_chmod_files('./runtime','0664'),
 
     $csh::commands_chmod_dirrs('./storage','0775'),
     //$csh::commands_chmod_files('./storage','0664'),

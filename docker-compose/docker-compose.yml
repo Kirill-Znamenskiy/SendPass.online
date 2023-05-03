@@ -24,10 +24,12 @@ services:
 
   php-fpm:
     <<: *base
+    volumes:
+      - /home/kz/sites/SendPass.online:/wrkdir/sites/:rw
 
   base-php-fpm:
     image: php:8.1-fpm
-    command: sleep 33h
+    command: sleep 777d
 
 networks:
   default:
