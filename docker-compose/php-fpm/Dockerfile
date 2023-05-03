@@ -89,13 +89,12 @@ COPY ./docker-compose/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 WORKDIR /wrkdir
 USER wrkuser:wrkgroup
-ENTRYPOINT ["/bin/sh", "-xc"]
-CMD [ "/bin/sleep", "777d" ]
+ENTRYPOINT ["/bin/sh", "-xec"]
+CMD [ "/bin/sleep 777d" ]
 #CMD [ "/usr/local/sbin/php-fpm", "-F" ]
-#CMD [ "set -xe \
+#CMD [ "/bin/true \
 #    && cd /wrkdir/sites/SendPass.online \
 #    && /bin/bash init.bash \
 #    \
 #    && /usr/local/sbin/php-fpm -F \
-#    && set +xe \
 #" ]
