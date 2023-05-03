@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:8.1-fpm AS base
 
 ARG ENV
 ENV ENV $ENV
@@ -86,7 +86,13 @@ COPY ./docker-compose/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 #    && ./artisan route:cache \
 #    && set +xe
 
+WORKDIR /wrkdir
+USER root:root
+ENTRYPOINT []
+CMD [ "/bin/sleep", "777d" ]
 
+############################################################################
+FROM base AS work
 WORKDIR /wrkdir
 USER wrkuser:wrkgroup
 ENTRYPOINT ["/bin/sh", "-xec"]

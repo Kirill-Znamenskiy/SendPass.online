@@ -5,14 +5,12 @@ services:
     build: &base-build
       context: ./..
       dockerfile: ./docker-compose/php-fpm/Dockerfile
+      target: nonexistent
       args:
         ENV: ${ENV:-UNKNOWN}
         GIT_SHOW_VERSION: ${GIT_SHOW_VERSION:-UNKNOWN}
     environment:
       ENV: ${ENV:-UNKNOWN}
-      SERVER_ADDRESS: 0.0.0.0:8888
-      # Follow env variables, should be defined in GitLab CI/CD variables.
-      DATABASE_URI: ${DATABASE_URI:-}
     extra_hosts:
       - "host.docker.internal:host-gateway"
     deploy:
@@ -22,14 +20,21 @@ services:
         max_attempts: 3
         condition: on-failure
 
-  php-fpm:
+  base-php-fpm:
     <<: *base
+    build:
+      <<: *base-build
+      target: base
     volumes:
       - /home/kz/sites/SendPass.online:/wrkdir/sites/SendPass.online:rw
 
-  base-php-fpm:
-    image: php:8.1-fpm
-    command: sleep 777d
+  work-php-fpm:
+    <<: *base
+    build:
+      <<: *base-build
+      target: base
+    volumes:
+      - /home/kz/sites/SendPass.online:/wrkdir/sites/SendPass.online:rw
 
 networks:
   default:
