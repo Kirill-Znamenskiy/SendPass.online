@@ -18,9 +18,9 @@ find ./runtime -type d -exec chmod 0775 {} \;
 mkdir -p ./storage \
     ./storage/framework \
     ./storage/framework/logs \
-    ./storage/framework/cache \
     ./storage/framework/views \
     ./storage/framework/sessions \
+    ./storage/framework/cache/data \
 ;
 
 find ./storage -type f -exec chmod 0664 {} \;
