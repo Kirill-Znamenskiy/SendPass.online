@@ -41,24 +41,24 @@ deploy() {
 
     set -xe
 
+    composer install --no-interaction --no-dev --no-cache --no-ansi --no-autoloader --no-scripts --prefer-dist
+
+    composer dump-autoload --no-interaction --optimize
+
     npm run production
 
     rsync -av $DRY_RUN --delete \
-        --exclude=".git" --exclude=".DS_Store" \
-        --exclude="/runtime/*" \
-        --exclude="/storage/*" \
-        --exclude="/bootstrap/cache/*" \
-        ./ HEL:sites/SendPass.online/ \
+        ./.env.PROD.env HEL:sites/SendPass.online/.env \
     ;
 
     rsync -av $DRY_RUN --delete \
         --exclude=".git" --exclude=".DS_Store" \
-        --exclude="/runtime/*" \
-        --exclude="/storage/*" \
-        --exclude="/bootstrap/cache/*" \
+        --exclude="/runtime*" \
+        --exclude="/storage*" \
+        --exclude="/bootstrap/cache*" \
+        --exclude="/.env*" \
         ./ HEL:sites/SendPass.online/ \
     ;
-
 
     set +xe
 
