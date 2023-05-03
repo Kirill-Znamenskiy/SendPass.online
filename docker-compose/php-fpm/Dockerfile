@@ -9,7 +9,7 @@ ENV WRK_GROUP_ID $WRK_GROUP_ID
 
 RUN set -xe \
     && apt-get update \
-    && apt-get install --no-install-recommends --no-install-suggests -y \
+    && apt-get install -y --no-install-recommends --no-install-suggests \
         git \
         less \
         procps \
@@ -17,8 +17,8 @@ RUN set -xe \
         libpq-dev \
     \
     && docker-php-ext-install -j$(nproc) pdo_pgsql \
-    && apt-get remove libpq-dev \
-    && apt-get remove --purge --auto-remove -y \
+    && apt-get remove -y libpq-dev \
+    && apt-get remove -y --purge --auto-remove \
     && rm -rf /var/lib/apt-get/lists/* /var/lib/apt/lists/* /tmp/* /usr/share/man/?? /usr/share/man/??_* \
     && set +xe
 
