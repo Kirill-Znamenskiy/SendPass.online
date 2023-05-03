@@ -92,8 +92,8 @@ COPY ./docker-compose/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 WORKDIR /wrkdir
 USER root:root
-ENTRYPOINT []
-CMD [ "/bin/sleep", "777d" ]
+ENTRYPOINT ["/bin/sh", "-xec"]
+CMD [ "/bin/sleep 777d" ]
 
 ############################################################################
 FROM base AS work
