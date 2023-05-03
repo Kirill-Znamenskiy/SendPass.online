@@ -97,7 +97,7 @@ CMD [ "/bin/true \
     && cd /wrkdir/sites/SendPass.online \
     && su -s /bin/bash wrkuser init.bash \
     \
-    /bin/sleep 777d \
+    && /bin/sleep 777d \
 " ]
 
 ############################################################################
