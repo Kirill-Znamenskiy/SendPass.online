@@ -90,4 +90,4 @@ USER wrkuser:wrkgroup
 
 
 ENTRYPOINT []
-CMD [ "php-fpm -F" ]
+CMD [ "/usr/local/sbin/php-fpm -F" ]
