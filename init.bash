@@ -7,6 +7,8 @@ if test ! -f "./init.bash"; then
     exit
 fi
 
+id
+
 composer self-update
 composer install --no-interaction --no-dev --no-cache --no-ansi --no-autoloader --no-scripts --prefer-dist
 composer dump-autoload --no-interaction --optimize

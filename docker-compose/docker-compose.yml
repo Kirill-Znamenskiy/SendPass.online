@@ -32,7 +32,7 @@ services:
     <<: *base
     build:
       <<: *base-build
-      target: base
+      target: work
     volumes:
       - /home/kz/sites/SendPass.online:/wrkdir/sites/SendPass.online:rw
 

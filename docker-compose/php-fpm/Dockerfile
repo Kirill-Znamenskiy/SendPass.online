@@ -14,11 +14,14 @@ RUN set -xe \
         less \
         procps \
         anacron \
+        libpq-dev \
+    \
+    && docker-php-ext-install -j$(nproc) pdo_pgsql \
+    && apt-get remove libpq-dev \
     && apt-get remove --purge --auto-remove -y \
     && rm -rf /var/lib/apt-get/lists/* /var/lib/apt/lists/* /tmp/* /usr/share/man/?? /usr/share/man/??_* \
     && set +xe
 
-#    && docker-php-ext-install -j$(nproc) pdo_pgsql
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
@@ -100,8 +103,9 @@ ENTRYPOINT ["/bin/sh", "-xec"]
 #CMD [ "/bin/sleep 777d" ]
 #CMD [ "/usr/local/sbin/php-fpm", "-F" ]
 CMD [ "/bin/true \
+    && chown wrkuser:wrkgroup -R /wrkdir \
     && cd /wrkdir/sites/SendPass.online \
-    && su -l wrkuser bash init.bash \
+    && su -s /bin/bash wrkuser init.bash \
     \
     && php-fpm -F \
 " ]
