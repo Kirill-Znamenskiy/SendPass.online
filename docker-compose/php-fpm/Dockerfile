@@ -7,6 +7,9 @@ ARG WRK_GROUP_ID=1111
 ENV WRK_USER_ID $WRK_USER_ID
 ENV WRK_GROUP_ID $WRK_GROUP_ID
 
+ARG GIT_SHOW_VERSION
+ENV GIT_SHOW_VERSION $GIT_SHOW_VERSION
+
 RUN set -xe \
     && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
