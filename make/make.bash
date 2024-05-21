@@ -57,7 +57,7 @@ deploy() {
         --exclude="/node_modules*" \
         --exclude="/composer.lock" \
         --exclude="/composer.phar" \
-        ./ HEL:sites/SendPass.online/ \
+        ./ HL:sites/SendPass.online/ \
     ;
 
     set +xe
