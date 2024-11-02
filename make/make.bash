@@ -49,6 +49,9 @@ deploy() {
 
     rsync -av $DRY_RUN --delete \
         --exclude=".git" --exclude=".DS_Store" \
+        --exclude="/make" \
+        --exclude="/.idea" \
+        --exclude="/.gitlab*" \
         --exclude="/runtime*" \
         --exclude="/storage*" \
         --exclude="/bootstrap/cache*" \
@@ -59,6 +62,24 @@ deploy() {
         --exclude="/composer.phar" \
         ./ HL:sites/SendPass.online/ \
     ;
+
+
+    if [ "$DRY_RUN" == "" ]; then
+        ssh HL '
+            set -xe; \
+            docker compose \
+                --file /home/kz/sites/SendPass.online/docker-compose/docker-compose.yml \
+                up \
+                --build \
+                --detach \
+                --remove-orphans \
+                -- \
+                    base-php-fpm \
+                    work-php-fpm \
+            ; \
+            set +xe; \
+        ';
+    fi
 
     set +xe
 
