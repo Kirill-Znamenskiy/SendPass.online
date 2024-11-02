@@ -63,7 +63,6 @@ deploy() {
         ./ HL:sites/SendPass.online/ \
     ;
 
-
     if [ "$DRY_RUN" == "" ]; then
         ssh HL '
             set -xe; \
