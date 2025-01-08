@@ -1,4 +1,9 @@
-version: '3.6'
+
+name: sendpass-prod
+
+secrets:
+  env-prod-env:
+    file: ./../../SendPass.online-secrets/.env.PROD.env
 
 services:
   base: &base
@@ -7,12 +12,15 @@ services:
       dockerfile: ./docker-compose/php-fpm/Dockerfile
       target: nonexistent
       args:
-        ENV: ${ENV:-UNKNOWN}
-        GIT_SHOW_VERSION: ${GIT_SHOW_VERSION:-UNKNOWN}
+        BUILD_ENV: ${BUILD_ENV:-UNKNOWN}
+        BUILD_WRK_USER_ID: ${BUILD_WRK_USER_ID:-UNKNOWN}
+        BUILD_WRK_GROUP_ID: ${BUILD_WRK_GROUP_ID:-UNKNOWN}
+        BUILD_GIT_SHOW_VERSION: ${BUILD_GIT_SHOW_VERSION:-UNKNOWN}
     environment:
       ENV: ${ENV:-UNKNOWN}
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    volumes: [ "./..:/wrkdir/sites/SendPass.online:rw" ]
+    extra_hosts: [ "host.docker.internal:host-gateway" ]
+    secrets: [ env-prod-env ]
     deploy:
       restart_policy:
         delay: 15s
@@ -25,20 +33,16 @@ services:
     build:
       <<: *base-build
       target: base
-    volumes:
-      - /home/kz/sites/SendPass.online:/wrkdir/sites/SendPass.online:rw
 
   work-php-fpm:
     <<: *base
     build:
       <<: *base-build
       target: work
-    volumes:
-      - /home/kz/sites/SendPass.online:/wrkdir/sites/SendPass.online:rw
 
 networks:
   default:
     name: ${COMPOSE_PROJECT_NAME}
     driver: bridge
-    driver_opts:
-      com.docker.network.bridge.name: ${COMPOSE_PROJECT_NAME}
+#    driver_opts:
+#      com.docker.network.bridge.name: ${COMPOSE_PROJECT_NAME}

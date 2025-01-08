@@ -1,7 +1,0 @@
-
-# Ignore docker-compose.override.yml
-/docker-compose.override.yml
-
-
-# Ignore all .env* files
-/.env*

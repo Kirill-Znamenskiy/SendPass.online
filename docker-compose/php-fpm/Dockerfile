@@ -1,20 +1,22 @@
 FROM php:8.1-fpm AS base
 
-ARG ENV
-ENV ENV $ENV
-ARG WRK_USER_ID=1111
-ARG WRK_GROUP_ID=1111
-ENV WRK_USER_ID $WRK_USER_ID
-ENV WRK_GROUP_ID $WRK_GROUP_ID
+ARG BUILD_ENV
+ENV BUILD_ENV=$BUILD_ENV
 
-ARG GIT_SHOW_VERSION
-ENV GIT_SHOW_VERSION $GIT_SHOW_VERSION
+ARG BUILD_WRK_USER_ID
+ARG BUILD_WRK_GROUP_ID
+ENV BUILD_WRK_USER_ID=$BUILD_WRK_USER_ID
+ENV BUILD_WRK_GROUP_ID=$BUILD_WRK_GROUP_ID
+
+ARG BUILD_GIT_SHOW_VERSION
+ENV BUILD_GIT_SHOW_VERSION=$BUILD_GIT_SHOW_VERSION
 
 RUN set -xe \
     && apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
         git \
         less \
+        sudo \
         procps \
         anacron \
         libpq-dev \
@@ -29,13 +31,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 RUN set -xe \
     # create work user and group
-    && addgroup --gid "${WRK_GROUP_ID}" wrkgroup \
+    && addgroup --gid "${BUILD_WRK_GROUP_ID}" wrkgroup \
     && adduser \
         --disabled-password \
         --shell "/sbin/nologin" \
         --home "/wrkdir" \
         --no-create-home \
-        --uid "${WRK_USER_ID}" \
+        --uid "${BUILD_WRK_USER_ID}" \
         --ingroup wrkgroup \
         --gecos "" \
         wrkuser \
@@ -44,7 +46,7 @@ RUN set -xe \
     && chown wrkuser:wrkgroup -R /wrkdir \
     \
     # use one of default php.ini configuration (production or development)
-    && cp "$PHP_INI_DIR/php.ini-$( [ "$ENV" = "PROD" ] && echo "production" || echo "development" )" "$PHP_INI_DIR/php.ini" \
+    && cp "$PHP_INI_DIR/php.ini-$( [ "$BUILD_ENV" = "PROD" ] && echo "production" || echo "development" )" "$PHP_INI_DIR/php.ini" \
     \
     # remove all predefined php-fpm confs
     && rm -f /usr/local/etc/php-fpm.d/* \
@@ -54,32 +56,30 @@ RUN set -xe \
 COPY ./docker-compose/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 RUN set -xe \
-    && sed -i "s|{LISTEN_LINE}|listen = ./runtime/php-fpm.$ENV.sock|g" /usr/local/etc/php-fpm.d/www.conf \
+    && sed -i "s|{LISTEN_LINE}|listen = ./runtime/php-fpm.$BUILD_ENV.sock|g" /usr/local/etc/php-fpm.d/www.conf \
     && set +xe
 
 
 WORKDIR /wrkdir
 USER root:root
 ENTRYPOINT ["/bin/sh", "-xec"]
-CMD [ "/bin/true \
+CMD [ "true \
     && chown wrkuser:wrkgroup -R /wrkdir \
-    && cd /wrkdir/sites/SendPass.online \
-    && su -s /bin/bash wrkuser init.bash \
-    \
-    && /bin/sleep 777d \
+    && ln -svf /run/secrets/env-prod-env /wrkdir/sites/SendPass.online/.env \
+    && sleep infinity \
 " ]
+
 
 ############################################################################
 FROM base AS work
 WORKDIR /wrkdir
 USER wrkuser:wrkgroup
-ENTRYPOINT []
+ENTRYPOINT ["/bin/sh", "-xec"]
 #CMD [ "/bin/sleep 777d" ]
-CMD [ "/usr/local/sbin/php-fpm", "-F" ]
-#CMD [ "/bin/true \
-#    && chown wrkuser:wrkgroup -R /wrkdir \
-#    && cd /wrkdir/sites/SendPass.online \
-#    && su -s /bin/bash wrkuser init.bash \
-#    \
-#    && php-fpm -F \
-#" ]
+#CMD [ "/usr/local/sbin/php-fpm", "-F" ]
+CMD [ "true \
+    && cd /wrkdir/sites/SendPass.online \
+    && bash init.bash \
+    \
+    && php-fpm -F \
+" ]

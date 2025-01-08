@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-    'GIT_SHOW_VERSION' => env('GIT_SHOW_VERSION', 'UNKNOWN'),
+    'BUILD_GIT_SHOW_VERSION' => env('BUILD_GIT_SHOW_VERSION', 'UNKNxxxOWN'),
 
     /*
     |--------------------------------------------------------------------------

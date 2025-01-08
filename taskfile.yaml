@@ -1,0 +1,89 @@
+version: '3'
+
+vars:
+  ENV: '{{.ENV}}'
+  SERV: 'HL'
+  ONSERV_ALL_PROJECTS_DIR_PATH: './sites'
+
+  PROJECT_NAME: "SendPass"
+  PROJECT_DIR_NAME: { sh: 'basename {{.USER_WORKING_DIR}}' }
+  PROJECT_DIR_PATH: '{{.USER_WORKING_DIR}}'
+
+  ONSERV_PROJECT_DIR_PATH: '{{.ONSERV_ALL_PROJECTS_DIR_PATH}}/{{.PROJECT_DIR_NAME}}'
+
+tasks:
+  info: |
+    echo "
+      TASKFILE '{{.TASKFILE}}'
+      USER_WORKING_DIR '{{.USER_WORKING_DIR}}'
+      PROJECT_NAME '{{.PROJECT_NAME}}'
+      PROJECT_DIR_NAME '{{.PROJECT_DIR_NAME}}'
+      PROJECT_DIR_PATH '{{.PROJECT_DIR_PATH}}'
+      SERV '{{.SERV}}'
+      ONSERV_PROJECT_DIR_PATH '{{.ONSERV_PROJECT_DIR_PATH}}'
+    " > /dev/null
+
+  deploy:
+#    deps: [ info, prepare-deploy, git-commit-push ]
+    #    deps: [ base:info, base:upload--real, base:git-commit-push ]
+    #    deps: [ base:info, base:upload--dry-run, base:git-commit-push ]
+    cmds:
+      - task: info
+#      - task: prepare-deploy
+      - task: upload--real
+#      - task: git-commit-push
+      - task: ssh-docker-compose-up
+
+
+
+  upload--real:
+    rsync -av {{.DRY_RUN}} --delete
+      --exclude='.git*'
+      --exclude='.idea'
+      --exclude='.DS_Store'
+      --exclude='/{{.PROJECT_DIR_NAME}}/.env*'
+      --exclude='/{{.PROJECT_DIR_NAME}}/.gitlab*'
+      --exclude='/{{.PROJECT_DIR_NAME}}/taskfile*'
+      --exclude='/{{.PROJECT_DIR_NAME}}/prepare-deploy*'
+      --exclude='/{{.PROJECT_DIR_NAME}}/make*'
+      --exclude='/{{.PROJECT_DIR_NAME}}/runtime/*'
+      --exclude='/{{.PROJECT_DIR_NAME}}/storage/*'
+      --exclude='/{{.PROJECT_DIR_NAME}}/bootstrap/cache'
+      --exclude='/{{.PROJECT_DIR_NAME}}/vendor'
+      --exclude='/{{.PROJECT_DIR_NAME}}/node_modules'
+      --exclude='/{{.PROJECT_DIR_NAME}}/composer.lock'
+      --exclude='/{{.PROJECT_DIR_NAME}}/composer.phar'
+      {{.PROJECT_DIR_PATH}} {{.SERV}}:{{.ONSERV_ALL_PROJECTS_DIR_PATH}}/
+    ;
+    rsync -av $DRY_RUN --delete ./.env* {{.SERV}}:{{.ONSERV_ALL_PROJECTS_DIR_PATH}}/{{.PROJECT_DIR_NAME}}-secrets/;
+  upload--dry-run: [{ vars: { DRY_RUN: '--dry-run' }, task: upload--real  }]
+
+
+  prepare-deploy:
+    - bash ./prepare-deploy.bash
+
+  git-commit-push:
+#    cmds:
+#      - task: base:git-commit-push
+
+  ssh-docker-compose-up:
+    ssh {{.SERV}} "true
+      && export ENV='{{.ENV}}'
+      && export BUILD_ENV='{{.ENV}}'
+      && export BUILD_WRK_USER_ID=\$(id -u)
+      && export BUILD_WRK_GROUP_ID=\$(id -g)
+      && export BUILD_GIT_SHOW_VERSION='$(git show --no-color --no-patch --decorate | head -n 1)'
+      && cd {{.ONSERV_PROJECT_DIR_PATH}}
+      && export COMPOSE_PROJECT_NAME=$(echo '{{.PROJECT_NAME}}-{{.ENV}}' | awk '{print tolower($0)}')
+      && env
+      && docker compose --file ./docker-compose/docker-compose.yml
+        up
+          --build
+          --detach
+          --remove-orphans
+        --
+          base-php-fpm
+          work-php-fpm
+    ";
+
+

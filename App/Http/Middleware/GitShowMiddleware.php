@@ -7,7 +7,7 @@ class GitShowMiddleware  extends \KZ\MyLlComponents\Illuminate\Middleware\GitSho
 
         /** This variable is available globally on all your views, and sub-views */
         view()->share([
-            'git_show' => config('app.GIT_SHOW_VERSION'),
+            'BUILD_GIT_SHOW_VERSION' => config('app.BUILD_GIT_SHOW_VERSION'),
         ]);
 
         return $next($request);

@@ -252,7 +252,7 @@ $app_url = url('/');
                     <div class="mt-1" style="line-height:1.1;">
                         <span class="mmnt-date-time">{{\Illuminate\Support\Carbon::now()->toIso8601String()}}</span>
                         <br/>
-                        <small class="text-white-50">git show: @php echo str_replace('(','<br/>(',$git_show); @endphp</small>
+                        <small class="text-white-50">git show: @php echo str_replace('(','<br/>(',$BUILD_GIT_SHOW_VERSION); @endphp</small>
                     </div>
                 </div>
                 <div class="col-12 col-sm-4 text-center text-sm-right">
