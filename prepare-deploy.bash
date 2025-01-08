@@ -23,7 +23,8 @@ for EXT in svg png; do
     ln -svhF ./logos/logo-inverted-320x320.$EXT ./public/logo-inverted-320.$EXT
 done
 
-npm run production
+#npm run production
+npm run development
 
 
 

@@ -29,7 +29,7 @@ tasks:
     #    deps: [ base:info, base:upload--dry-run, base:git-commit-push ]
     cmds:
       - task: info
-#      - task: prepare-deploy
+      - task: prepare-deploy
       - task: upload--real
 #      - task: git-commit-push
       - task: ssh-docker-compose-up
